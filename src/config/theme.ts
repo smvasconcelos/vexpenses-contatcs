@@ -23,6 +23,7 @@ const colors = {
 	card: "#00000074",
 	icons: "#ffffff",
 	active: "#FED503",
+	footer: "#000000"
 };
 
 const theme = {

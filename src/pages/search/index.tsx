@@ -1,5 +1,5 @@
 import React from 'react';
-import Template from 'templates';
+import UserTemplate from 'templates/user';
 
 const SearchContent: React.FC = () => {
 	return (
@@ -9,7 +9,7 @@ const SearchContent: React.FC = () => {
 
 const Search: React.FC = () => {
 	return (
-		<Template children={<SearchContent />} />
+		<UserTemplate children={<SearchContent />} />
 	);
 };
 
