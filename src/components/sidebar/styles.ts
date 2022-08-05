@@ -11,9 +11,9 @@ export const Nav = styled.nav`
 	width: fit-content;
 	align-items: center;
 	background-color: #000000;
-	position: absolute;
-	left: 0;
-	top: 0;
+	/* position: absolute; */
+	/* left: 0; */
+	/* top: 0; */
 `;
 
 export const NavItem = styled.img`

@@ -14,10 +14,19 @@ export const Container = styled.div`
 	height: 100%;
 	width: 100%;
 	display: flex;
-	flex-direction: column;
-	box-sizing: border-box;
-	justify-content: space-around;
-	align-items: center;
-	padding: 0;
-	margin: 0;
+	/* flex-direction: row; */
+	/* box-sizing: border-box; */
+	/* justify-content: space-between; */
+	/* align-items: center; */
 `;
+
+export const ContentContainer = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-space-between;
+	align-items: space-between;
+	box-sizing: border-box;
+
+`

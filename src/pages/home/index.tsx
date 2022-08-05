@@ -1,7 +1,7 @@
 import React from 'react';
 import Template from 'templates';
 import { Container } from './styles';
-import { HomePage, LegendCard, LegendContainer, LegendText, LegendTitle, Title } from './styles';
+import { LegendCard, LegendContainer, LegendText, LegendTitle, Title } from './styles';
 
 
 const HomeContent: React.FC = () => {
