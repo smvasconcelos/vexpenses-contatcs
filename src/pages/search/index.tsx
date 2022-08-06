@@ -1,14 +1,22 @@
-import InputComponent from 'components/input';
+import InputSearch from 'components/input copy';
 import React, { useEffect, useState } from 'react';
 import { Container, SearchContainer, List, ListItem } from './styles';
 import UserTemplate from 'templates/user';
 import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
+import FuzzySearch from 'fuzzy-search';
+import { toast } from 'react-toastify';
 
 const SearchContent: React.FC = () => {
 
 	const navigate = useNavigate();
+	const [filteredList, setFilteredList] = useState<Array<{
+		id: number,
+		name: string,
+		contact: string,
+		job: string,
+	}>>([]);
 	const [contactList, setContactList] = useState<Array<{
 		id: number,
 		name: string,
@@ -17,38 +25,63 @@ const SearchContent: React.FC = () => {
 	}>>([]);
 	const [loading, setLoading] = useState(true);
 
+	const searcher = new FuzzySearch(contactList || [], ['name', 'email', 'contact', 'job', 'address'], {
+		caseSensitive: false,
+		sort: true,
+	});
+
+	const filterContact = (value: string) => {
+		if (value === "") {
+			setFilteredList(contactList);
+			return;
+		}
+		setFilteredList(searcher.search(value));
+	}
+
 	useEffect(() => {
 		setLoading(true);
 		setTimeout(() => {
-			setContactList([
+			const data = [
 				{
 					id: 1,
 					name: 'Samuel Mendonça Vasconcelos',
 					contact: '+55 73 9 99185 3260',
 					job: 'Desenvolvedor Júnior',
+					address: 'Rua qualquer numero 500, 45604 105'
 				},
 				{
 					id: 2,
-					name: 'Samuel Mendonça Vasconcelos 2',
-					contact: '+55 73 9 99185 3262',
+					name: 'Alanis Nogueira Rodrigues',
+					contact: '+55 73 9 9 8868 3962',
 					job: 'Desenvolvedor Júniors',
+					address: 'Rua qualquer numero 500, 45604 105'
 				},
-			]);
+				{
+					id: 3,
+					name: 'Samuel Nogueira Rodrigues',
+					contact: '+55 73 9 9 8868 3962',
+					job: 'Desenvolvedor Júniors',
+					address: 'Rua qualquer numero 500, 45604 105'
+				},
+			]
+			setContactList(data);
+			setFilteredList(data);
 			setLoading(false);
-		}, 2000);
+			toast.error("Error Notification !");
+		}, 500);
 	}, []);
 
 	return (
 		<Container>
 			<SearchContainer>
-				<InputComponent label={"Pesquisar"} />
+				<InputSearch autoCompleteItems={contactList} onChange={filterContact} label={"Pesquisar"} />
 			</SearchContainer>
 			<List>
 				{
 					loading ?
 						<TailSpin wrapperStyle={{ justifyContent: 'center', margin: '3em 0' }} color={theme.colors.active} height={35} width={35} />
 						:
-						contactList.length > 0 ? contactList.map((contact) => {
+						filteredList.length > 0 ? filteredList.map((contact) => {
 							return (
 								<ListItem key={contact.id} onClick={() => navigate("/contact/edit")}>
 									<span>{contact.name}</span >
@@ -57,8 +90,10 @@ const SearchContent: React.FC = () => {
 								</ListItem>
 							)
 						}) :
-							<ListItem onClick={() => navigate("/contact/add")}>
+							contactList.length === 0 ? <ListItem onClick={() => navigate("/contact/add")}>
 								<span style={{ textAlign: 'center', width: '100%' }}>Nenhum contato cadastrado, clique aqui para adicionar seu primeiro contato</span >
+							</ListItem> : <ListItem>
+								<span style={{ textAlign: 'center', width: '100%' }}>Nenhum resultado encontrado para esta pesquisa</span >
 							</ListItem>
 				}
 			</List>

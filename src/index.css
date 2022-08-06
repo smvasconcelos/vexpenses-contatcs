@@ -56,3 +56,8 @@ html{
 	}
 }
 
+.Toastify__toast{
+	background-color: transparent;
+	color: white !important;
+	background-image: linear-gradient(to right,#FED503, #E44F26, #FF6584);
+}

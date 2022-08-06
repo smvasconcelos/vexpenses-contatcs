@@ -1,15 +1,26 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { Input, InputContainer, Label } from "./styles";
 
-const InputComponent: React.FC<{ label: string }> = ({ label }) => {
+const InputComponent: React.FC<
+	{
+		label: string,
+		onChange?: (value: string) => void
+	}
+> = ({ label, onChange }) => {
 
-	const navigate = useNavigate();
+	const [value, setValue] = useState("");
+
+	const onChangeValue = (value: string) => {
+		setValue(value);
+		if (onChange) {
+			onChange(value);
+		}
+	}
 
 	return (
 		<InputContainer>
 			<Label>{label}</Label>
-			<Input placeholder={label} />
+			<Input value={value} onChange={(e) => onChangeValue(e.target.value)} placeholder={label} />
 		</InputContainer>
 	)
 }
