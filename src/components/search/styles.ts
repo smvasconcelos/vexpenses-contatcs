@@ -42,11 +42,12 @@ export const InputContainer = styled.div`
 	position: relative;
 `
 export const AutoCompleteContainer = styled.div`
-	/* position: absolute; */
-	/* bottom: 0; */
 	margin-top: .5em;
 	background-color: rgba(0,0,0,0.9);
 	padding: 1em;
+	max-height: 150px;
+	overflow: auto;
+	border-radius: 5px;
 `
 export const AutoCompleteItem = styled.p`
 	color: ${theme.colors.icons}66;

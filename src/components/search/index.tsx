@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AutoCompleteContainer, AutoCompleteItem, Container, Input, InputContainer, Label } from "./styles";
 import FuzzySearch from 'fuzzy-search';
+import helpers from "lib/helpers";
 
 const InputSearch: React.FC<
 	{
@@ -18,6 +19,31 @@ const InputSearch: React.FC<
 		caseSensitive: false,
 	});
 
+	const handleCompare = (string_1: string, string_2: string) => {
+		var threshold: number = 0.28;
+		return helpers.similarity(string_1.toLowerCase(), string_2.toLowerCase()) >= threshold || string_1.toLowerCase().includes(string_2.toLowerCase());
+	}
+
+	const getAutoCompleteItems = (items: Array<Object>) => {
+		var filteredItems: Array<String> = [];
+		items.map((item: Object) => {
+			return Object.values(item).map((field: string | Array<string> | number) => {
+				if (typeof field === 'string') {
+					if (handleCompare(field, value))
+						filteredItems.push(field);
+				}
+				else if (Array.isArray(field))
+					field.map((fieldItem: string) => {
+						if (handleCompare(fieldItem, value))
+							filteredItems.push(fieldItem);
+					});
+			});
+		});
+
+		console.log(filteredAutoCompleteItems);
+		setFilteredAutoCompleteItems(filteredItems);
+	}
+
 	const onChangeValue = (value: string) => {
 		setValue(value);
 		if (value === "") {
@@ -28,7 +54,7 @@ const InputSearch: React.FC<
 		if (onChange) {
 			onChange(value);
 		}
-		setFilteredAutoCompleteItems(searcher.search(value));
+		getAutoCompleteItems(searcher.search(value));
 	}
 
 	return (
@@ -41,13 +67,13 @@ const InputSearch: React.FC<
 				show && filteredAutoCompleteItems.length !== 0 &&
 				<AutoCompleteContainer>
 					{
-						filteredAutoCompleteItems.map((item: any) => {
+						filteredAutoCompleteItems.map((item: any, index: number) => {
 							return (
-								<AutoCompleteItem key={item.id} onClick={() => {
-									onChangeValue(item.name);
+								<AutoCompleteItem key={`autocomplete-${index}`} onClick={() => {
+									onChangeValue(item);
 									setShow(false);
 								}}>
-									{item.name}
+									{item}
 								</AutoCompleteItem>
 							)
 						})

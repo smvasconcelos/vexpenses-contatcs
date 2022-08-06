@@ -1,4 +1,4 @@
-import InputSearch from 'components/input copy';
+import InputSearch from 'components/search';
 import React, { useEffect, useState } from 'react';
 import { Container, SearchContainer, List, ListItem } from './styles';
 import UserTemplate from 'templates/user';
@@ -90,11 +90,13 @@ const SearchContent: React.FC = () => {
 								</ListItem>
 							)
 						}) :
-							contactList.length === 0 ? <ListItem onClick={() => navigate("/contact/add")}>
-								<span style={{ textAlign: 'center', width: '100%' }}>Nenhum contato cadastrado, clique aqui para adicionar seu primeiro contato</span >
-							</ListItem> : <ListItem>
-								<span style={{ textAlign: 'center', width: '100%' }}>Nenhum resultado encontrado para esta pesquisa</span >
-							</ListItem>
+							contactList.length === 0 ?
+								<ListItem onClick={() => navigate("/contact/add")}>
+									<span style={{ textAlign: 'center', width: '100%' }}>Nenhum contato cadastrado, clique aqui para adicionar seu primeiro contato</span >
+								</ListItem> :
+								<ListItem>
+									<span style={{ textAlign: 'center', width: '100%' }}>Nenhum resultado encontrado para esta pesquisa</span >
+								</ListItem>
 				}
 			</List>
 		</Container>
