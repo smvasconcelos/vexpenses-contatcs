@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './home'
 import Search from './search'
 import AddContact from './contact/add'
+import EditContact from './contact/edit'
 
 const App: React.FC = () => {
 	return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
 				<Route path="/" element={<Home />} />
 				<Route path="/search" element={<Search />} />
 				<Route path="/contact/add" element={<AddContact />} />
+				<Route path="/contact/edit" element={<EditContact />} />
 			</Routes>
 		</Router>
 	)

@@ -9,7 +9,7 @@ const InputComponent: React.FC<{ label: string }> = ({ label }) => {
 	return (
 		<InputContainer>
 			<Label>{label}</Label>
-			<Input />
+			<Input placeholder={label} />
 		</InputContainer>
 	)
 }

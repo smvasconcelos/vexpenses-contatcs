@@ -25,9 +25,6 @@ export const UserCard = styled.div`
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	width: 100%;
-	min-width: 30%;
-	max-width: 70%;
 	border-radius: 5px;
 `
 export const Divider = styled.div`
@@ -70,7 +67,8 @@ export const Content = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	height: 100%;
-	/* min-width: fit-content; */
+	min-width: fit-content;
+	max-width: 100%;
 	box-sizing: border-box;
 	padding: 2em;
 `
