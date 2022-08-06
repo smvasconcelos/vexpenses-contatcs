@@ -13,18 +13,19 @@ const SearchContent: React.FC = () => {
 		<Content>
 			<UserCard>
 				<ContainerRight>
-						<Title>
-							ADICIONAR CONTATO
-						</Title>
-						<InputComponent label='Nome' />
-						<InputComponent label='Email' />
-						<InputComponent label='Contato' />
-						<InputComponent label='Cargo' />
-						<InputComponent label='Descrição' />
+					<Title>
+						ADICIONAR CONTATO
+					</Title>
+					<InputComponent label='Nome' />
+					<InputComponent label='Email' />
+					<InputComponent label='Contato' />
+					<InputComponent label='Cargo' />
+					<InputComponent label='Endereço' />
+					<InputComponent label='Descrição' />
 				</ContainerRight>
 			</UserCard>
 			<ButtonContainer>
-					<ButtonComponent label='Salvar' onclick={() => { }} />
+				<ButtonComponent label='Salvar' onclick={() => { }} />
 			</ButtonContainer>
 		</Content>
 	)

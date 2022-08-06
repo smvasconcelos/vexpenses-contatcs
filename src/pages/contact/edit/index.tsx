@@ -30,6 +30,7 @@ const EditContent: React.FC = () => {
 						<InputComponent label='Email' />
 						<InputComponent label='Contato' />
 						<InputComponent label='Cargo' />
+						<InputComponent label='Endereço' />
 						<InputComponent label='Descrição' />
 					</ContainerRight>
 				}

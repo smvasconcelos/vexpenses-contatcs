@@ -3,6 +3,6 @@ import firebaseConfig from "config/firebase";
 import { getFirestore } from 'firebase/firestore/lite';
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+export const firestore = getFirestore(app);
 
 export default app;

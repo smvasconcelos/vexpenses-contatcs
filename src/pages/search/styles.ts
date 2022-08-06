@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import theme from "config/theme";
 
 export const Container = styled.div`
@@ -24,10 +24,24 @@ export const List = styled.ul`
 	overflow: auto;
 	width: 100%;
 `
+
+
+const fadeIn = keyframes`
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+`
+
 export const ListItem = styled.li`
 	&:nth-child(2n + 1) {
 		background-color: rgba(0,0,0,.2);
+		/* box-shadow: 2px 2px 4px #ff000055; */
 	}
+
+	animation: ${fadeIn} .3s ease-in-out;
 	cursor: pointer;
 	box-sizing: border-box;
 	display: flex;
@@ -42,6 +56,8 @@ export const ListItem = styled.li`
 	margin: 1em 0;
 	padding: 1em 2em;
 	border-radius: 5px;
+	transition: all .2s ease-in-out;
+	border: 1px solid transparent;
 	@media screen and (max-width: 1024px) {
 		padding: 1em;
 		font-size: .6em;
@@ -52,5 +68,8 @@ export const ListItem = styled.li`
 	}
 	@media screen and (max-width: 600px) {
 		font-size: .5em;
+	}
+	&:hover{
+		border: 1px solid rgba(255,255,255,.1);
 	}
 `
