@@ -50,4 +50,9 @@ html{
   flex-direction: column !important;
 	box-sizing: border-box !important;
 }
+@media screen and (max-width: 600px) {
+	#root{
+		min-height: fit-content !important;
+	}
+}
 

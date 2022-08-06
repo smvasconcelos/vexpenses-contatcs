@@ -13,12 +13,24 @@ export const Input = styled.input`
 	padding-bottom: .2em;
 	color: rgba(255,255,255,.7);
 	font-size: .8em;
+	@media screen and (max-width: 1024px) {
+		font-size: .6em;
+	}
+	@media screen and (max-width: 600px) {
+		font-size: .4em;
+	}
 `
 
 export const Label = styled.h4`
 	color: white;
 	margin-right: .5em;
 	text-transform: uppercase;
+	@media screen and (max-width: 1024px) {
+		font-size: .8em;
+	}
+	@media screen and (max-width: 600px) {
+		font-size: .5em;
+	}
 `
 export const InputContainer = styled.div`
 	display: flex;
@@ -27,4 +39,5 @@ export const InputContainer = styled.div`
 	align-items: end;
 	width: 100%;
 	margin: .5em 0;
+
 `

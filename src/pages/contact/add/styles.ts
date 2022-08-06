@@ -43,11 +43,14 @@ export const Description = styled.span`
 	font-style: italic;
 	font-size: small;
 `
-
 export const Title = styled.h3`
 	color: ${theme.colors.icons};
 	font-weight: bolder;
 	margin: 1em 0;
+	@media screen and (max-width: 1024px) {
+		font-size: .8em;
+	}
+
 `
 
 export const Name = styled.h3`

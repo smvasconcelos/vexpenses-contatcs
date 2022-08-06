@@ -23,4 +23,10 @@ export const NavItem = styled.a`
 	&:hover{
 		color: ${theme.colors.active};
 	}
+	@media screen and (max-width: 1024px) {
+		font-size: .9em;
+	}
+	@media screen and (max-width: 600px) {
+		font-size: .7em;
+	}
 `;

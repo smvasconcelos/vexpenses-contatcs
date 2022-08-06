@@ -12,9 +12,9 @@ const Sidebar: React.FC<{ user?: boolean }> = ({ user }) => {
 
 	return (
 		<Nav>
-			<NavItem src={menuIcon} onClick={() => navigate("/addContact")} />
-			<NavItem src={contactIcon} onClick={() => navigate("/addContact")} />
-			<NavItem src={addIcon} onClick={() => navigate("/addContact")} />
+			<NavItem src={menuIcon} onClick={() => navigate("/")} />
+			<NavItem src={contactIcon} onClick={() => navigate("/search")} />
+			<NavItem src={addIcon} onClick={() => navigate("/contact/add")} />
 		</Nav>
 	)
 }

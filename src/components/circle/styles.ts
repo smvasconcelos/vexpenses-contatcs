@@ -20,4 +20,14 @@ export const CircleComponent = styled.div<Circle>`
 	position: absolute;
 	${(props) => props.position};
 	z-index: -2;
+	@media screen and (max-width: 1024px) {
+		${props => props.type === 1 ?
+		`width : ${props.size / 1.7}px;
+			height: ${props.size / 1.7}px;`
+		:
+		`width : ${props.size}px;
+			height: ${props.size}px;`
+		};
+
+	}
 `;
