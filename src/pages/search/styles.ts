@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "config/theme";
 
 export const Container = styled.div`
 	display: flex;
@@ -20,13 +21,16 @@ export const ListTable = styled.table`
 	width: 100%;
 	height: fit-content;
 	& > *{
-		color: #fff;
+		color:  ${theme.colors.icons};
 	}
 	border-collapse: collapse;
 	border-collapse:separate;
   border-spacing: 0 1.5em;
 `
 export const ListThead = styled.thead`
+	& > *{
+		text-transform: uppercase;
+	}
 `
 export const ListTbody = styled.tbody`
 `
@@ -39,7 +43,7 @@ export const ListTd = styled.td`
 export const Divider = styled.div`
     width: 80%;
     height: 3px;
-    background-color: #fff;
+    background-color:  ${theme.colors.icons};
     left: 15%;
 		position: absolute;
 `

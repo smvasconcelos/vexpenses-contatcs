@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "config/theme";
 
 export const HomePage = styled.p`
-	background-color: #f5f5f5;
+	background-color:  ${theme.colors.icons};
 	font-family: 'Monsterrat';
 	font-size: xx-large;
 	font-weight: bolder;

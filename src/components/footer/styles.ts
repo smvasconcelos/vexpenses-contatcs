@@ -8,7 +8,7 @@ export const FooterContainer = styled.footer`
 	margin-top: auto;
 	font-size: 12px;
 	font-weight: bolder;
-	color: #fff;
+	color:  ${theme.colors.icons};
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
