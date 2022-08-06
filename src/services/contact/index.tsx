@@ -9,6 +9,7 @@ export interface IContactData {
 	email: string;
 	job: string;
 	address: object;
+	description: string;
 }
 
 class ContactService {

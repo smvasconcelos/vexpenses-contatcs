@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
-export const Button = styled.a`
-	cursor: pointer;
+export const Button = styled.button`
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	outline: inherit;
+
 	text-decoration: none;
 	cursor: pointer;
 	color: white;

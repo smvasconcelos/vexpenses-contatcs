@@ -26,12 +26,12 @@ const EditContent: React.FC = () => {
 						<Title>
 							EDITAR USUÁRIO
 						</Title>
-						<InputComponent label='Nome' />
-						<InputComponent label='Email' />
-						<InputComponent label='Contato' />
-						<InputComponent label='Cargo' />
-						<InputComponent label='Endereço' />
-						<InputComponent label='Descrição' />
+						<InputComponent name="name" label='Nome' />
+						<InputComponent name="email" label='Email' />
+						<InputComponent name="contact" label='Contato' />
+						<InputComponent name="cargo" label='Cargo' />
+						<InputComponent name="address" label='Endereço' />
+						<InputComponent name="description" label='Descrição' />
 					</ContainerRight>
 				}
 

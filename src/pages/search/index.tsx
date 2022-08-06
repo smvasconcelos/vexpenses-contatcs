@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
 import FuzzySearch from 'fuzzy-search';
-import { toast } from 'react-toastify';
 
 const SearchContent: React.FC = () => {
 
@@ -67,7 +66,6 @@ const SearchContent: React.FC = () => {
 			setContactList(data);
 			setFilteredList(data);
 			setLoading(false);
-			toast.error("Error Notification !");
 		}, 500);
 	}, []);
 
