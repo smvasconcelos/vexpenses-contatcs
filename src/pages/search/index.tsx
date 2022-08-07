@@ -6,30 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
 import FuzzySearch from 'fuzzy-search';
+import ContactService, { IContactData } from "services/contact";
 
 const SearchContent: React.FC = () => {
 
 	const navigate = useNavigate();
-	const [filteredList, setFilteredList] = useState<Array<{
-		id: number,
-		name: string,
-		contact: string,
-		job: string,
-	}>>([]);
-	const [contactList, setContactList] = useState<Array<{
-		id: number,
-		name: string,
-		contact: string,
-		job: string,
-	}>>([]);
+	const [filteredList, setFilteredList] = useState<Array<IContactData>>([]);
+	const [contactList, setContactList] = useState<Array<IContactData>>([]);
 	const [loading, setLoading] = useState(true);
 
-	const searcher = new FuzzySearch(contactList || [], ['name', 'email', 'contact', 'job', 'address'], {
+	const searcher = new FuzzySearch(contactList || [], ['name', 'email', 'contact', 'job', 'address', 'address.cep', 'address.neighborhood', 'address.complement', 'address.street', 'address.state', 'address.city', 'description'], {
 		caseSensitive: false,
 		sort: true,
 	});
 
-	const filterContact = (value: string) => {
+	const filterContact = (value: string): void => {
 		if (value === "") {
 			setFilteredList(contactList);
 			return;
@@ -38,35 +29,20 @@ const SearchContent: React.FC = () => {
 	}
 
 	useEffect(() => {
-		setLoading(true);
-		setTimeout(() => {
-			const data = [
-				{
-					id: 1,
-					name: 'Samuel Mendonça Vasconcelos',
-					contact: '+55 73 9 99185 3260',
-					job: 'Desenvolvedor Júnior',
-					address: 'Rua qualquer numero 500, 45604 105'
-				},
-				{
-					id: 2,
-					name: 'Alanis Nogueira Rodrigues',
-					contact: '+55 73 9 9 8868 3962',
-					job: 'Desenvolvedor Júniors',
-					address: 'Rua qualquer numero 500, 45604 105'
-				},
-				{
-					id: 3,
-					name: 'Samuel Nogueira Rodrigues',
-					contact: '+55 73 9 9 8868 3962',
-					job: 'Desenvolvedor Júniors',
-					address: 'Rua qualquer numero 500, 45604 105'
-				},
-			]
-			setContactList(data);
-			setFilteredList(data);
-			setLoading(false);
-		}, 500);
+		const getContacts = async () => {
+			setLoading(true);
+			await ContactService.getAll().then((querySnapshot) => {
+				return querySnapshot.forEach((doc: any) => {
+					var data = doc.data();
+					data.id = doc.id;
+					setContactList((prevState) => [...prevState, data]);
+					setFilteredList((prevState) => [...prevState, data]);
+					setLoading(false);
+					return doc.data();
+				});
+			});
+		}
+		getContacts();
 	}, []);
 
 	return (
@@ -81,9 +57,9 @@ const SearchContent: React.FC = () => {
 						:
 						filteredList.length > 0 ? filteredList.map((contact) => {
 							return (
-								<ListItem key={contact.id} onClick={() => navigate("/contact/edit")}>
+								<ListItem key={contact.id} onClick={() => navigate(`/contact/edit/${btoa(JSON.stringify(contact))}`)}>
 									<span>{contact.name}</span >
-									<span>{contact.contact}</span >
+									<span>{contact.phone[0]}</span >
 									<span>{contact.job}</span >
 								</ListItem>
 							)

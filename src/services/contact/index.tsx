@@ -1,14 +1,16 @@
 import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from "services";
+import { toast } from "react-toastify";
 
 const db = collection(firestore, "contacts");
 
 export interface IContactData {
 	name: string;
-	phone: object;
+	id?: string;
+	phone: Array<string>;
 	email: string;
 	job: string;
-	address: object;
+	address: Array<object>;
 	description: string;
 }
 
@@ -16,10 +18,7 @@ class ContactService {
 
 	getAll = async () => {
 		const querySnapshot = await getDocs(db);
-		return querySnapshot.forEach((doc: any) => {
-			console.log(doc.id, " => ", doc.data());
-			return doc.data();
-		});
+		return querySnapshot;
 	}
 
 	get = async (id: string) => {
@@ -27,7 +26,9 @@ class ContactService {
 		const docSnap = await getDoc(docRef);
 
 		if (docSnap.exists()) {
-			return docSnap.data();
+			var data = docSnap.data();
+			data.id = docSnap.data().id;
+			return data;
 		} else {
 			return false;
 		}
@@ -35,11 +36,12 @@ class ContactService {
 
 	add = async (data: IContactData) => {
 		try {
-			const docRef = await addDoc(collection(db, "users"), data);
-			console.log("Document written with ID: ", docRef.id);
+			const docRef = await addDoc(db, data);
+			toast.success('Contato adicionado com sucesso.');
 			return true;
 		} catch (e) {
-			console.error("Error adding document: ", e);
+			toast.error('Erro ao adicionar contato');
+			console.log(e);
 			return false;
 		}
 	}

@@ -1,7 +1,21 @@
 import { handleApi } from "services/server/server";
 
+interface Viacep {
+	bairro: string;
+	cep: string;
+	complemento: string;
+	ddd: string;
+	gia: string;
+	ibge: string;
+	localidade: string;
+	logradouro: string;
+	siafi: string;
+	uf: string;
+	erro: boolean;
+}
+
 const MailService = {
-	getAddress: async (cep: number) => {
+	getAddress: async (cep: number): Promise<Viacep> => {
 		return await handleApi(`/${cep}/json`, 'get', {});
 	}
 };

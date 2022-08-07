@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AutoCompleteContainer, AutoCompleteItem, Container, Input, InputContainer, Label } from "./styles";
 import FuzzySearch from 'fuzzy-search';
 import helpers from "lib/helpers";
@@ -15,12 +15,12 @@ const InputSearch: React.FC<
 	const [show, setShow] = useState(false);
 	const [filteredAutoCompleteItems, setFilteredAutoCompleteItems] = useState<Array<Object>>([]);
 
-	const searcher = new FuzzySearch(autoCompleteItems || [], ['name', 'email', 'contact', 'job', 'address'], {
+	const searcher = new FuzzySearch(autoCompleteItems || [], ['name', 'email', 'phone', 'job', 'address'], {
 		caseSensitive: false,
 	});
 
 	const handleCompare = (string_1: string, string_2: string) => {
-		var threshold: number = 0.28;
+		var threshold: number = 0.15;
 		return helpers.similarity(string_1.toLowerCase(), string_2.toLowerCase()) >= threshold || string_1.toLowerCase().includes(string_2.toLowerCase());
 	}
 
@@ -33,14 +33,21 @@ const InputSearch: React.FC<
 						filteredItems.push(field);
 				}
 				else if (Array.isArray(field))
-					field.map((fieldItem: string) => {
-						if (handleCompare(fieldItem, value))
-							filteredItems.push(fieldItem);
+					field.map((fieldItem: string | object) => {
+						if (typeof fieldItem === 'string') {
+							if (handleCompare(fieldItem, value))
+								filteredItems.push(fieldItem);
+						} else {
+							Object.values(fieldItem).map((item: string) => {
+								if (handleCompare(item, value))
+									filteredItems.push(item);
+							})
+						}
 					});
 			});
 		});
 
-		console.log(filteredAutoCompleteItems);
+		console.log({ filteredAutoCompleteItems });
 		setFilteredAutoCompleteItems(filteredItems);
 	}
 
@@ -56,6 +63,10 @@ const InputSearch: React.FC<
 		}
 		getAutoCompleteItems(searcher.search(value));
 	}
+
+	useEffect(() => {
+		console.log(autoCompleteItems);
+	}, [autoCompleteItems]);
 
 	return (
 		<Container>

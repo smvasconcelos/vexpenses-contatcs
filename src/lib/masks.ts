@@ -1,5 +1,5 @@
 const masks = {
-	cellphoneBrMask: (value: string) => {
+	cellphoneMask: (value: string) => {
 		if (value.length < 3) {
 			return value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "($1) $2");
 		} else {
@@ -13,10 +13,6 @@ const masks = {
 	cepMask: (value: string) => {
 		return value
 			.replace(/[^0-9\\.]+/g, "");
-	},
-	emailMask: (value: string) => {
-		return value
-			.replace(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "")
 	},
 };
 export default masks;

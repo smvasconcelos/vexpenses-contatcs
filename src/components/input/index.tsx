@@ -14,9 +14,10 @@ interface IInput {
 	unregister?: any,
 	remove?: (name: string) => void;
 	mask?: (value: string) => string;
+	initialValue?: string;
 }
 
-const InputComponent: React.FC<IInput> = ({ label, unregister, getValues, register, name, append, add, remove, mask }) => {
+const InputComponent: React.FC<IInput> = ({ label, unregister, getValues, register, name, append, add, remove, mask, initialValue }) => {
 
 	const [show, setShow] = useState(false);
 
@@ -31,7 +32,9 @@ const InputComponent: React.FC<IInput> = ({ label, unregister, getValues, regist
 		<InputContainer>
 			<Label>{label}</Label>
 			<Input
-				{...register!(name)} placeholder={label}
+				{...register!(name, {
+					value: initialValue || ""
+				})} placeholder={label}
 				onChange={
 					((event) => {
 						const { value } = event.target;

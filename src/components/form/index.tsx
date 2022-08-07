@@ -13,10 +13,10 @@ const Form: React.FC<
 	const { handleSubmit } = methods;
 
 	return (
-		<form onSubmit={(e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			handleSubmit(onSubmit)
+		<form onSubmit={(event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			handleSubmit(onSubmit)();
 		}}>
 			{React.Children.map(children, child => {
 				return child.props.name

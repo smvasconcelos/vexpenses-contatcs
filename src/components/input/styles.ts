@@ -50,8 +50,8 @@ export const AddButton = styled.img`
 	&:hover{
 		color: ${theme.colors.active};
 	}
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 `;
 
 export const RemoveButton = styled.img`
@@ -59,8 +59,8 @@ export const RemoveButton = styled.img`
 	&:hover{
 		color: ${theme.colors.active};
 	}
-	width: 10px;
-	height: 10px;
+	width: 18px;
+	height: 18px;
 	/* margin-left: .5em; */
 `;
 
