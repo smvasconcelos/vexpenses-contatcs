@@ -60,7 +60,7 @@ html{
 	background-color: transparent;
 	color: white !important;
 	font-size: .8em;
-	background-image: linear-gradient(to right,#FED503, #E44F26, #FF6584);
+	background-image: linear-gradient(to right,#00000025,  #f088018e);
 }
 
 input:-webkit-autofill,

@@ -3,7 +3,6 @@ import Template from 'templates';
 import { Container } from './styles';
 import { LegendCard, LegendContainer, LegendText, LegendTitle, Title } from './styles';
 
-
 const HomeContent: React.FC = () => {
 	return (
 		<Container>

@@ -13,13 +13,20 @@ const Form: React.FC<
 	const { handleSubmit } = methods;
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={(e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			handleSubmit(onSubmit)
+		}}>
 			{React.Children.map(children, child => {
 				return child.props.name
 					? React.createElement(child.type, {
 						...{
 							...child.props,
 							register: methods.register,
+							getValues: methods.getValues,
+							unregister: methods.unregister,
+							setValue: methods.setValue,
 							key: child.props.name
 						}
 					})
