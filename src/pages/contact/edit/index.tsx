@@ -11,19 +11,34 @@ import ContactService, { IContactData } from "services/contact";
 import { useNavigate, useParams } from 'react-router-dom';
 import validator from 'lib/validator';
 import { toast } from "react-toastify";
+import { TailSpin } from 'react-loader-spinner';
+import theme from 'config/theme';
 
 const EditContent: React.FC = () => {
 
 	const [edit, showEdit] = useState(false);
 	const [phoneList, setPhoneList] = useState<Array<any>>([]);
 	const [addressList, setAddressList] = useState<Array<any>>([]);
-	const [user, setUser] = useState<IContactData | any>();
+	const [user, setUser] = useState<IContactData | undefined>();
+	const [loading, setLoading] = useState(true);
+	const { userInfo } = useParams();
 	const requiredFields = ["name", "email", "job", "phone"];
 	const navigate = useNavigate();
-	const { userInfo } = useParams();
 
 	useEffect(() => {
-		setUser(JSON.parse(atob(userInfo || "")));
+		const info: IContactData = JSON.parse(atob(userInfo || ""))
+		setUser(info);
+		setLoading(false);
+		if (info.address.length > 1) {
+			for (var i = 1; i < info.address.length; i++) {
+				appendAddress(info.address[i]);
+			}
+		}
+		if (info.phone.length > 1) {
+			for (var d = 1; d < info.phone.length; d++) {
+				appendPhone(info.phone[d]);
+			}
+		}
 	}, [userInfo]);
 
 	const formatForm = (data: any): IContactData => {
@@ -87,26 +102,24 @@ const EditContent: React.FC = () => {
 	const onSubmit = async (data: IContactData): Promise<void> => {
 		const newData = formatForm(data);
 		console.log("adding user");
-		await ContactService.add(newData).then(res => {
-			if (res)
-				navigate("/search");
+		await ContactService.update(user?.id || "", newData).then(res => {
+
 		});
 	};
 
-	const appendPhone = (): void => {
+	const appendPhone = (initialValue?: string): void => {
 		const id = uuid();
 		setPhoneList(prevList => [...prevList,
-		<InputComponent mask={masks.cellphoneMask} remove={removePhone} append={appendPhone} key={`phone_${id}`} name={`phone_${id}`} label='Contato' />
+			<InputComponent initialValue={initialValue || ""} mask={masks.cellphoneMask} remove={removePhone} append={appendPhone} key={`phone_${id}`} name={`phone_${id}`} label='Contato' />
 		]);
 
 	}
 
-	const appendAddress = (): void => {
+	const appendAddress = (initialValue?: any): void => {
 		const id = uuid();
 		setAddressList(prevList => [...prevList,
-		<AddressInput remove={removeAddress} append={appendAddress} key={id} name={id} label='Endereço' />
+			<AddressInput initialValue={initialValue} remove={removeAddress} append={appendAddress} key={id} name={id} label='Endereço' />
 		]);
-
 	}
 
 	const removeAddress = (name: any): void => {
@@ -126,43 +139,47 @@ const EditContent: React.FC = () => {
 	}
 	return (
 		<Content>
-			<UserCard>
-				<Container onClick={() => showEdit(!edit)}>
-					<Name>
-						Samuel Mendonça Vasconcelos
-					</Name>
-					<Divider />
-					<Description>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, vitae cum debitis error fuga, perferendis quos aliquam, consectetur sint quasi quia rem quibusdam tempora? Fugiat suscipit in reiciendis error quam.
-					</Description>
-				</Container>
-				{
-					edit && <ContainerRight>
-						<Title>
-							EDITAR USUÁRIO
-						</Title>
-						<Form onSubmit={onSubmit}>
-							<InputComponent initialValue={user.name || ""} name="name" label='Nome' />
-							<InputComponent initialValue={user.email || ""} name="email" label='Email' />
-							<InputComponent
-								append={appendPhone} mask={masks.cellphoneMask} add key={`phone`} name={`phone`} label='Contato' />
-							{
-								phoneList
-							}
-							<InputComponent initialValue={user.job || ""} name="job" label='Cargo' />
-							<InputComponent initialValue={user.description || ""} name="description" label='Descrição' />
-							<AddressInput append={appendAddress} add key={`address`} name={`0`} label='Endereço' />
-							{
-								addressList
-							}
-							<ButtonContainer>
-								<ButtonComponent submit label='Salvar' />
-							</ButtonContainer>
-						</Form>
-					</ContainerRight>
-				}
+			{
+				loading ?
+					<TailSpin wrapperStyle={{ justifyContent: 'center', margin: '3em 0' }} color={theme.colors.active} height={35} width={35} />
+					: <UserCard>
+						<Container onClick={() => showEdit(!edit)}>
+							<Name>
+								{user?.name || ""}
+							</Name>
+							<Divider />
+							<Description>
+								{user?.description || ""}
+							</Description>
+						</Container>
+						{
+							edit && <ContainerRight>
+								<Title>
+									EDITAR USUÁRIO
+								</Title>
+								<Form onSubmit={onSubmit}>
+									<InputComponent initialValue={user?.name} name="name" label='Nome' />
+									<InputComponent initialValue={user?.email} name="email" label='Email' />
+									<InputComponent
+										append={appendPhone} initialValue={user?.phone[0]} mask={masks.cellphoneMask} add key={`phone`} name={`phone`} label='Contato' />
+									{
+										phoneList
+									}
+									<InputComponent initialValue={user?.job} name="job" label='Cargo' />
+									<InputComponent initialValue={user?.description} name="description" label='Descrição' />
+									<AddressInput initialValue={user?.address[0]} name="address" append={appendAddress} add key={`address`} label=' Endereço' />
+									{
+										addressList
+									}
+									<ButtonContainer>
+										<ButtonComponent submit label='Salvar' />
+									</ButtonContainer>
+								</Form>
+							</ContainerRight>
+						}
+					</UserCard>
+			}
 
-			</UserCard>
 		</Content>
 	)
 }

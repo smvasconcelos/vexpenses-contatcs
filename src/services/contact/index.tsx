@@ -47,14 +47,14 @@ class ContactService {
 	}
 
 	update = async (id: string, data: IContactData) => {
-		const docRef = doc(db, "contacts", id);
-		return await setDoc(docRef, data, {
+		const docRef = doc(db, id);
+		return await setDoc(docRef, data, 	{
 			merge: true
 		}).then(() => {
-			console.log("Document successfully updated!");
+			toast.success('Contato atualizado com sucesso.');
 			return true;
 		}).catch((e) => {
-			console.log("Error updating contact information");
+			toast.success('Erro ao atualizar contato adicionado com sucesso.');
 			return false;
 		});
 	}

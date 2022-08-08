@@ -22,7 +22,7 @@ const InputComponent: React.FC<IInput> = ({ label, unregister, getValues, regist
 	const [show, setShow] = useState(false);
 
 	const checkAdd = (value: string) => {
-		if (value !== "" && add && value !== undefined)
+		if ((value !== "" && add && value !== undefined) || (initialValue !== undefined && initialValue !== ""))
 			setShow(true);
 		else
 			setShow(false);

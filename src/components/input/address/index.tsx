@@ -7,6 +7,15 @@ import { AddButton, Input, InputContainer, Label, RemoveButton } from "../styles
 import { toast } from "react-toastify";
 import masks from "lib/masks";
 
+interface AddressData {
+	cep?: string;
+	street?: string;
+	city?: string;
+	state?: string;
+	complement?: string;
+	neighborhood?: string;
+}
+
 interface IInput {
 	label: string;
 	register?: any;
@@ -17,10 +26,11 @@ interface IInput {
 	unregister?: any,
 	remove?: (name: any) => void;
 	setValue?: any;
+	initialValue?: AddressData;
 }
 
 const AddressInput
-	: React.FC<IInput> = ({ label, unregister, register, name, append, add, remove, setValue, getValues }) => {
+	: React.FC<IInput> = ({ label, unregister, register, name, append, add, remove, setValue, getValues, initialValue }) => {
 
 		const [show, setShow] = useState(false);
 
@@ -41,7 +51,7 @@ const AddressInput
 		}
 
 		const checkAdd = (value: string) => {
-			if (value !== "" && add && value !== undefined)
+			if ((value !== "" && add && value !== undefined) || (initialValue?.cep !== undefined && initialValue?.cep !== ""))
 				setShow(true);
 			else
 				setShow(false);
@@ -53,7 +63,9 @@ const AddressInput
 					<Label>CEP</Label>
 					<Input
 						maxLength={8}
-						{...register!(`cep_${name}`)}
+						{...register!(`cep_${name}`, {
+							value: initialValue?.cep || ""
+						})}
 						onChange={
 							((event) => {
 								const { value } = event.target;
@@ -75,7 +87,9 @@ const AddressInput
 
 					<Label>Bairro</Label>
 					<Input
-						{...register!(`neighborhood_${name}`)} placeholder={"Nossa senhora de fátima"}
+						{...register!(`neighborhood_${name}`, {
+							value: initialValue?.neighborhood || ""
+						})} placeholder={"Nossa senhora de fátima"}
 					/>
 					{
 						show && <AddButton src={addIcon} onClick={() => append!()} />
@@ -97,23 +111,31 @@ const AddressInput
 				<InputContainer>
 					<Label>Complemento</Label>
 					<Input
-						{...register!(`complement_${name}`)} placeholder={"complemento"}
+						{...register!(`complement_${name}`, {
+							value: initialValue?.complement || ""
+						})} placeholder={"complemento"}
 					/>
 
 					<Label>Rua</Label>
 					<Input
-						{...register!(`street_${name}`)} placeholder={"rua"}
+						{...register!(`street_${name}`, {
+							value: initialValue?.street || ""
+						})} placeholder={"rua"}
 					/>
 				</InputContainer>
 				<InputContainer>
 					<Label>Estado</Label>
 					<Input
-						{...register!(`state_${name}`)} placeholder={"BA"}
+						{...register!(`state_${name}`, {
+							value: initialValue?.state || ""
+						})} placeholder={"BA"}
 					/>
 
 					<Label>Cidade</Label>
 					<Input
-						{...register!(`city_${name}`)} placeholder={"cidade"}
+						{...register!(`city_${name}`, {
+							value: initialValue?.city || ""
+						})} placeholder={"cidade"}
 					/>
 				</InputContainer>
 			</AddressWrapper>
