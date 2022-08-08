@@ -5,13 +5,16 @@ import App from './pages';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from "context/user";
 
 const rootElement = document.getElementById("root")!;
 const root = createRoot(rootElement);
 
 root.render(
 	<>
-		<App />
+		<AuthProvider>
+			<App />
+		</AuthProvider>
 		<ToastContainer
 			position="top-right"
 			autoClose={2000}

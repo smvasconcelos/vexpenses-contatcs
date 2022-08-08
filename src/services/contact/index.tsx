@@ -1,8 +1,8 @@
-import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
+import { addDoc, doc, getDoc, getDocs, setDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 import { firestore } from "services";
 import { toast } from "react-toastify";
 
-const db = collection(firestore, "contacts");
+const db = firestore.collection("/contacts")
 
 export interface IContactData {
 	name: string;
@@ -16,27 +16,13 @@ export interface IContactData {
 
 class ContactService {
 
-	getAll = async () => {
-		const querySnapshot = await getDocs(db);
-		return querySnapshot;
+	getAll = async (id: string) => {
+		return db.doc(id).collection("list").get();
 	}
 
-	get = async (id: string) => {
-		const docRef = doc(db, "contacts", id);
-		const docSnap = await getDoc(docRef);
-
-		if (docSnap.exists()) {
-			var data = docSnap.data();
-			data.id = docSnap.data().id;
-			return data;
-		} else {
-			return false;
-		}
-	}
-
-	add = async (data: IContactData) => {
+	add = async (data: any, id: string) => {
 		try {
-			const docRef = await addDoc(db, data);
+			await db.doc(id).collection("list").add(data);
 			toast.success('Contato adicionado com sucesso.');
 			return true;
 		} catch (e) {
@@ -46,11 +32,8 @@ class ContactService {
 		}
 	}
 
-	update = async (id: string, data: IContactData) => {
-		const docRef = doc(db, id);
-		return await setDoc(docRef, data, 	{
-			merge: true
-		}).then(() => {
+	update = async (id: string, data: IContactData, userId: string) => {
+		return await db.doc(userId).collection("list").doc(id).set(data).then(() => {
 			toast.success('Contato atualizado com sucesso.');
 			return true;
 		}).catch((e) => {
@@ -59,15 +42,25 @@ class ContactService {
 		});
 	}
 
-	remove = async (id: string) => {
-		const docRef = doc(db, id);
-		return await await deleteDoc(docRef).then(() => {
+	remove = async (id: string, userId: string) => {
+		return await db.doc(userId).collection("list").doc(id).delete().then(() => {
 			toast.success('Contato removido com sucesso.');
 			return true;
 		}).catch((e) => {
 			toast.error('Erro ao remover o contato.');
 			return false;
 		});
+	}
+
+	handleGoogleImport = (data: any): boolean => {
+		if (data.totalItems === 0)
+			return true;
+
+		data.connections.map((connectionArray: any) => {
+			// const userData : IContactData
+			console.log({ connectionArray });
+		})
+		return true;
 	}
 
 }

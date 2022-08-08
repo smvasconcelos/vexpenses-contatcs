@@ -11,7 +11,7 @@ const InputSearch: React.FC<
 	}
 > = ({ label, onChange, autoCompleteItems }) => {
 
-	const [value, setValue] = useState("asdas");
+	const [value, setValue] = useState("");
 	const [show, setShow] = useState(false);
 	const [filteredAutoCompleteItems, setFilteredAutoCompleteItems] = useState<Array<Object>>([]);
 
@@ -20,7 +20,7 @@ const InputSearch: React.FC<
 	});
 
 	const handleCompare = (string_1: string, string_2: string) => {
-		var threshold: number = 0.15;
+		var threshold: number = 0.28;
 		return helpers.similarity(string_1.toLowerCase(), string_2.toLowerCase()) >= threshold || string_1.toLowerCase().includes(string_2.toLowerCase());
 	}
 
@@ -59,14 +59,11 @@ const InputSearch: React.FC<
 			setShow(true);
 		}
 		if (onChange) {
-			onChange(value);
+			if (value === '')
+				onChange("");
+			getAutoCompleteItems(searcher.search(value));
 		}
-		getAutoCompleteItems(searcher.search(value));
 	}
-
-	useEffect(() => {
-		console.log(autoCompleteItems);
-	}, [autoCompleteItems]);
 
 	return (
 		<Container>
@@ -81,7 +78,8 @@ const InputSearch: React.FC<
 						filteredAutoCompleteItems.map((item: any, index: number) => {
 							return (
 								<AutoCompleteItem key={`autocomplete-${index}`} onClick={() => {
-									onChangeValue(item);
+									onChange!(item);
+									setValue(item);
 									setShow(false);
 								}}>
 									{item}

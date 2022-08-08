@@ -95,3 +95,6 @@ export const LegendText = styled.span`
 	}
 `
 
+export const LoginButtonContainer = styled.div`
+	margin: 0 auto;
+`

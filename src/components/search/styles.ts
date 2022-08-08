@@ -3,7 +3,7 @@ import theme from "config/theme";
 
 export const Input = styled.input`
 	all: unset;
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid rgba(255,255,255,.2);
 	/* background-color: #cccccc10; */
 	/* padding: 1em; */
 	/* border-radius: 5px; */
@@ -13,11 +13,15 @@ export const Input = styled.input`
 	padding-bottom: .2em;
 	color: rgba(255,255,255,.7);
 	font-size: .8em;
+	transition: border  .5s ease-in-out;
 	@media screen and (max-width: 1024px) {
 		font-size: .6em;
 	}
 	@media screen and (max-width: 600px) {
 		font-size: .4em;
+	}
+	&:focus {
+		border-bottom: 1px solid rgba(255,255,255,1);
 	}
 `
 
@@ -38,16 +42,21 @@ export const InputContainer = styled.div`
 	justify-content: end;
 	align-items: end;
 	width: 100%;
-	margin: .5em 0;
-	position: relative;
+	margin-top: .2em;
+
 `
 export const AutoCompleteContainer = styled.div`
 	margin-top: .5em;
 	background-color: rgba(0,0,0,0.9);
 	padding: 1em;
 	max-height: 150px;
+	min-height: 150px;
+	min-width: 100%;
 	overflow: auto;
 	border-radius: 5px;
+	position: absolute;
+	bottom: -28vh;
+	z-index: 99;
 `
 export const AutoCompleteItem = styled.p`
 	color: ${theme.colors.icons}66;
@@ -64,4 +73,5 @@ export const AutoCompleteItem = styled.p`
 `
 export const Container = styled.div`
 	display: block;
+	position: relative;
 `

@@ -3,7 +3,7 @@ import Form from 'components/form';
 import InputComponent from 'components/input';
 import AddressInput from 'components/input/address';
 import validator from 'lib/validator';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import { IContactData } from 'services/contact';
 import UserTemplate from 'templates/user';
@@ -12,12 +12,15 @@ import { v4 as uuid } from 'uuid';
 import { ButtonContainer, ContainerRight, Content, Title, UserCard } from './styles';
 import ContactService from "services/contact";
 import { useNavigate } from 'react-router-dom';
+import AuthContext from 'context/user';
 
 const SearchContent: React.FC = () => {
 	const [phoneList, setPhoneList] = useState<Array<any>>([]);
 	const [addressList, setAddressList] = useState<Array<any>>([]);
-	const requiredFields = ["name", "email", "job", "phone"];
+	const requiredFields = ["name", "job", "phone"];
 	const navigate = useNavigate();
+	const { user } = useContext(AuthContext);
+
 
 	const formatForm = (data: any): IContactData => {
 
@@ -80,7 +83,7 @@ const SearchContent: React.FC = () => {
 	const onSubmit = async (data: IContactData): Promise<void> => {
 		const newData = formatForm(data);
 		console.log("adding user");
-		await ContactService.add(newData).then(res => {
+		await ContactService.add(newData, user.data.googleId).then(res => {
 			if (res)
 				navigate("/search");
 		});

@@ -70,3 +70,21 @@ input:-webkit-autofill:focus {
 input[data-autocompleted] {
     background-color: transparent !important;
 }
+
+
+::-webkit-scrollbar {
+  width: 5px;
+	border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c5c5c5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(31, 29, 29);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(51, 51, 51);
+}

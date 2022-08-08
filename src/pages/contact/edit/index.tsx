@@ -1,5 +1,5 @@
 import InputComponent from 'components/input';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ButtonContainer, Container, ContainerRight, Content, DeleteContactButton, Description, Divider, Name, Title, UserCard } from './styles';
 import UserTemplate from 'templates/user';
 import ButtonComponent from 'components/button';
@@ -14,17 +14,19 @@ import { toast } from "react-toastify";
 import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
 import removeIcon from "assets/icons/remove.svg";
+import AuthContext from 'context/user';
 
 const EditContent: React.FC = () => {
 
 	const [edit, showEdit] = useState(false);
 	const [phoneList, setPhoneList] = useState<Array<any>>([]);
 	const [addressList, setAddressList] = useState<Array<any>>([]);
-	const [user, setUser] = useState<IContactData | undefined>();
+	const [userData, setUser] = useState<IContactData | undefined>();
 	const [loading, setLoading] = useState(true);
 	const { userInfo } = useParams();
 	const requiredFields = ["name", "email", "job", "phone"];
 	const navigate = useNavigate();
+	const { user } = useContext(AuthContext);
 
 	useEffect(() => {
 		const info: IContactData = JSON.parse(atob(userInfo || ""))
@@ -103,7 +105,7 @@ const EditContent: React.FC = () => {
 	const onSubmit = async (data: IContactData): Promise<void> => {
 		const newData = formatForm(data);
 		console.log("adding user");
-		await ContactService.update(user?.id || "", newData).then(res => {
+		await ContactService.update(userData?.id || "", newData, user.data.googleId).then(res => {
 
 		});
 	};
@@ -141,7 +143,7 @@ const EditContent: React.FC = () => {
 
 	const handleDeleteUser = async () => {
 		if (window.confirm("Realmente deseja deletar este contato ?")) {
-			await ContactService.remove(user?.id || "").then(res => {
+			await ContactService.remove(userData?.id || "", user.data.googleId).then(res => {
 				if (res)
 					navigate("/search");
 			});
@@ -157,11 +159,11 @@ const EditContent: React.FC = () => {
 						<DeleteContactButton onClick={handleDeleteUser} src={removeIcon} />
 						<Container onClick={() => showEdit(!edit)}>
 							<Name>
-								{user?.name || ""}
+								{userData?.name || ""}
 							</Name>
 							<Divider />
 							<Description>
-								{user?.description || ""}
+								{userData?.description || ""}
 							</Description>
 						</Container>
 						{
@@ -170,16 +172,16 @@ const EditContent: React.FC = () => {
 									EDITAR USUÁRIO
 								</Title>
 								<Form onSubmit={onSubmit}>
-									<InputComponent initialValue={user?.name} name="name" label='Nome' />
-									<InputComponent initialValue={user?.email} name="email" label='Email' />
+									<InputComponent initialValue={userData?.name} name="name" label='Nome' />
+									<InputComponent initialValue={userData?.email} name="email" label='Email' />
 									<InputComponent
-										append={appendPhone} initialValue={user?.phone[0]} mask={masks.cellphoneMask} add key={`phone`} name={`phone`} label='Contato' />
+										append={appendPhone} initialValue={userData?.phone[0]} mask={masks.cellphoneMask} add key={`phone`} name={`phone`} label='Contato' />
 									{
 										phoneList
 									}
-									<InputComponent initialValue={user?.job} name="job" label='Cargo' />
-									<InputComponent initialValue={user?.description} name="description" label='Descrição' />
-									<AddressInput initialValue={user?.address[0]} name="address" append={appendAddress} add key={`address`} label=' Endereço' />
+									<InputComponent initialValue={userData?.job} name="job" label='Cargo' />
+									<InputComponent initialValue={userData?.description} name="description" label='Descrição' />
+									<AddressInput initialValue={userData?.address[0]} name="address" append={appendAddress} add key={`address`} label=' Endereço' />
 									{
 										addressList
 									}

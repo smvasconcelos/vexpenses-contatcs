@@ -1,12 +1,13 @@
 import InputSearch from 'components/search';
-import React, { useEffect, useState } from 'react';
-import { Container, SearchContainer, List, ListItem } from './styles';
-import UserTemplate from 'templates/user';
-import { useNavigate } from 'react-router-dom';
-import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
+import AuthContext from 'context/user';
 import FuzzySearch from 'fuzzy-search';
+import React, { useContext, useEffect, useState } from 'react';
+import { TailSpin } from 'react-loader-spinner';
+import { useNavigate } from 'react-router-dom';
 import ContactService, { IContactData } from "services/contact";
+import UserTemplate from 'templates/user';
+import { Container, List, ListItem, SearchContainer } from './styles';
 
 const SearchContent: React.FC = () => {
 
@@ -14,6 +15,8 @@ const SearchContent: React.FC = () => {
 	const [filteredList, setFilteredList] = useState<Array<IContactData>>([]);
 	const [contactList, setContactList] = useState<Array<IContactData>>([]);
 	const [loading, setLoading] = useState(true);
+	const { user } = useContext(AuthContext);
+	// const [currentKey, setCurrentKey] = useState('');
 
 	const searcher = new FuzzySearch(contactList || [], ['name', 'email', 'contact', 'job', 'address', 'address.cep', 'address.neighborhood', 'address.complement', 'address.street', 'address.state', 'address.city', 'description'], {
 		caseSensitive: false,
@@ -31,19 +34,23 @@ const SearchContent: React.FC = () => {
 	useEffect(() => {
 		const getContacts = async () => {
 			setLoading(true);
-			await ContactService.getAll().then((querySnapshot) => {
-				return querySnapshot.forEach((doc: any) => {
+			console.log(user.data.googleId)
+			await ContactService.getAll(user.data.googleId).then((querySnapshot) => {
+				// querySnapshot.onSnapshot((res: any) => {
+				querySnapshot.docs.map((doc: any) => {
 					var data = doc.data();
 					data.id = doc.id;
 					setContactList((prevState) => [...prevState, data]);
 					setFilteredList((prevState) => [...prevState, data]);
 					setLoading(false);
-					return doc.data();
 				});
+				// });
+				setLoading(false);
 			});
 		}
 		getContacts();
 	}, []);
+	var currentKey: string = "";
 
 	return (
 		<Container>
@@ -56,9 +63,11 @@ const SearchContent: React.FC = () => {
 						<TailSpin wrapperStyle={{ justifyContent: 'center', margin: '3em 0' }} color={theme.colors.active} height={35} width={35} />
 						:
 						filteredList.length > 0 ? filteredList.map((contact) => {
+							const char = contact.name[0] !== currentKey ? contact.name[0] : "";
+							currentKey = contact.name[0] !== currentKey ? contact.name[0] : currentKey;;
 							return (
-								<ListItem key={contact.id} onClick={() => navigate(`/contact/edit/${btoa(JSON.stringify(contact))}`)}>
-									<span>{contact.name}</span >
+								<ListItem char={char} key={contact.id} onClick={() => navigate(`/contact/edit/${btoa(JSON.stringify(contact))}`)}>
+									<span style={{ textTransform: 'uppercase' }}>{contact.name}</span >
 									<span>{contact.phone[0]}</span >
 									<span>{contact.job}</span >
 								</ListItem>

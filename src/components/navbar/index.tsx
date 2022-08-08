@@ -11,8 +11,8 @@ const Navbar: React.FC<{ user?: boolean }> = ({ user }) => {
 			<NavItem onClick={() => navigate("/")}>
 				Home
 			</NavItem>
-			<NavItem onClick={() => navigate("/search	")}>
-				Contatos
+			<NavItem onClick={() => navigate("/	")}>
+				About
 			</NavItem>
 		</Nav>
 	)

@@ -23,6 +23,13 @@ export const List = styled.ul`
 	list-style: none;
 	overflow: auto;
 	width: 100%;
+	max-height: 70vh;
+	padding: 0 .5em;
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
 `
 
 
@@ -35,7 +42,7 @@ const fadeIn = keyframes`
 	}
 `
 
-export const ListItem = styled.li`
+export const ListItem = styled.li<{ char?: string | undefined }>`
 	&:nth-child(2n + 1) {
 		background-color: rgba(0,0,0,.2);
 		/* box-shadow: 2px 2px 4px #ff000055; */
@@ -48,7 +55,7 @@ export const ListItem = styled.li`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	width: 100%;
+	width: 95%;
 	color: ${theme.colors.icons};
 	font-weight: bolder;
 	font-style: italic;
@@ -58,6 +65,7 @@ export const ListItem = styled.li`
 	border-radius: 5px;
 	transition: all .2s ease-in-out;
 	border: 1px solid transparent;
+	margin-left: .5em;
 	@media screen and (max-width: 1024px) {
 		padding: 1em;
 		font-size: .6em;
@@ -71,5 +79,13 @@ export const ListItem = styled.li`
 	}
 	&:hover{
 		border: 1px solid rgba(255,255,255,.1);
+	}
+	&:before{
+		content: "${props => props.char}";
+		font-size: 1em;
+		font-weight: bolder;
+		color: ${theme.colors.icons};
+		position: absolute;
+		left: 0;
 	}
 `
