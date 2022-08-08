@@ -14,10 +14,9 @@ export const Container = styled.div`
 	height: 100%;
 	width: 100%;
 	display: flex;
-	/* flex-direction: row; */
-	/* box-sizing: border-box; */
-	/* justify-content: space-between; */
-	/* align-items: center; */
+	@media screen and (max-width: 1024px) {
+		padding-top: 2em;
+	}
 `;
 
 export const ContentContainer = styled.div`
@@ -28,5 +27,7 @@ export const ContentContainer = styled.div`
 	justify-content: space-space-between;
 	align-items: space-between;
 	box-sizing: border-box;
-
+	@media screen and (max-width: 1024px) {
+		margin-top: 2em;
+	}
 `

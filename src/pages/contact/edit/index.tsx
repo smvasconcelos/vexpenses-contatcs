@@ -1,6 +1,6 @@
 import InputComponent from 'components/input';
 import React, { useEffect, useState } from 'react';
-import { ButtonContainer, Container, ContainerRight, Content, Description, Divider, Name, Title, UserCard } from './styles';
+import { ButtonContainer, Container, ContainerRight, Content, DeleteContactButton, Description, Divider, Name, Title, UserCard } from './styles';
 import UserTemplate from 'templates/user';
 import ButtonComponent from 'components/button';
 import AddressInput from 'components/input/address';
@@ -13,6 +13,7 @@ import validator from 'lib/validator';
 import { toast } from "react-toastify";
 import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
+import removeIcon from "assets/icons/remove.svg";
 
 const EditContent: React.FC = () => {
 
@@ -137,12 +138,23 @@ const EditContent: React.FC = () => {
 			return false;
 		}));
 	}
+
+	const handleDeleteUser = async () => {
+		if (window.confirm("Realmente deseja deletar este contato ?")) {
+			await ContactService.remove(user?.id || "").then(res => {
+				if (res)
+					navigate("/search");
+			});
+		}
+	}
+
 	return (
 		<Content>
 			{
 				loading ?
 					<TailSpin wrapperStyle={{ justifyContent: 'center', margin: '3em 0' }} color={theme.colors.active} height={35} width={35} />
 					: <UserCard>
+						<DeleteContactButton onClick={handleDeleteUser} src={removeIcon} />
 						<Container onClick={() => showEdit(!edit)}>
 							<Name>
 								{user?.name || ""}

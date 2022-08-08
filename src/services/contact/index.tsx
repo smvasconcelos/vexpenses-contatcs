@@ -54,18 +54,18 @@ class ContactService {
 			toast.success('Contato atualizado com sucesso.');
 			return true;
 		}).catch((e) => {
-			toast.success('Erro ao atualizar contato adicionado com sucesso.');
+			toast.error('Erro ao atualizar contato adicionado com sucesso.');
 			return false;
 		});
 	}
 
 	remove = async (id: string) => {
-		const docRef = doc(db, "contacts", id);
+		const docRef = doc(db, id);
 		return await await deleteDoc(docRef).then(() => {
-			console.log("Document successfully updated!");
+			toast.success('Contato removido com sucesso.');
 			return true;
 		}).catch((e) => {
-			console.log("Error updating contact information");
+			toast.error('Erro ao remover o contato.');
 			return false;
 		});
 	}

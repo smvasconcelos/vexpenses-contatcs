@@ -57,10 +57,10 @@ html{
 }
 
 .Toastify__toast{
-	background-color: transparent;
-	color: white !important;
+	/* background-color: rgba(54, 54, 54, 0.822); */
+	/* color: white !important; */
 	font-size: .8em;
-	background-image: linear-gradient(to right,#00000025,  #f088018e);
+	/* background-image: linear-gradient(to right,#ffffff,  #00000010); */
 }
 
 input:-webkit-autofill,

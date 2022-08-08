@@ -11,12 +11,27 @@ export const Nav = styled.nav`
 	width: fit-content;
 	align-items: center;
 	background-color: #000000;
-	/* position: absolute; */
-	/* left: 0; */
-	/* top: 0; */
+	@media screen and (max-width: 1024px) {
+		width: fit-content;
+		height: auto;
+		flex-direction: row;
+		position: fixed;
+		padding: 1em;
+		top: 0%;
+		border-bottom-right-radius: 5px;
+		border-top-right-radius: 5px;
+		z-index: 99;
+		background-color: #00000090;
+	}
 `;
 
 export const NavItem = styled.img`
+	@media screen and (max-width: 1024px) {
+		width: 20px;
+		height: 20px;
+		margin-top: 0;
+		margin-left: 1em;
+	}
 	cursor: pointer;
 	&:hover{
 		color: ${theme.colors.active};

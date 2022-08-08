@@ -33,6 +33,7 @@ export const UserCard = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	border-radius: 5px;
+	position: relative;
 	@media screen and (max-width: 1024px) {
 		flex-direction: column;
 		justify-content: center;
@@ -130,4 +131,13 @@ export const ButtonContainer = styled.div`
 	box-sizing: border-box;
 	justify-content: end;
 	align-items: end;
+`
+
+export const DeleteContactButton = styled.img`
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
 `

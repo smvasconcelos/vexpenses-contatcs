@@ -117,7 +117,6 @@ const SearchContent: React.FC = () => {
 			return false;
 		}));
 	}
-
 	return (
 		<Content>
 			<UserCard>

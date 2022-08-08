@@ -20,8 +20,8 @@ root.render(
 			rtl={false}
 			pauseOnFocusLoss
 			draggable
-			toastClassName="toast-dark"
 			pauseOnHover
+			theme="colored"
 		/>
 	</>
 );

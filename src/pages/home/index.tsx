@@ -7,7 +7,7 @@ const HomeContent: React.FC = () => {
 	return (
 		<Container>
 			<Title>
-				VEXPENSES <br /> CONTACTS
+				VEXPENSES <br /> CONTATOS
 			</Title>
 			<LegendContainer>
 				<LegendCard>
