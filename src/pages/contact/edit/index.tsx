@@ -44,7 +44,7 @@ const EditContent: React.FC = () => {
 		}
 	}, [userInfo]);
 
-	const formatForm = (data: any): IContactData => {
+	const formatForm = (data: any): IContactData | boolean => {
 
 		const arrayToAddress = (data: Array<string>, keywords: Array<string>): object => {
 			const address: any = {};
@@ -95,16 +95,23 @@ const EditContent: React.FC = () => {
 		});
 		addresses = addresses.filter((item: any) => item);
 
+		returnData["name"] = returnData.name.toUpperCase();
 		returnData["phone"] = Object.values(contacts);
 		returnData["address"] = addresses;
-		if (!validator(returnData, requiredFields))
+
+		console.log(returnData);
+		if (!validator(returnData, requiredFields)) {
 			toast.error('Todos os campos devem ser preenchidos para realizar esta ação.');
+			return false;
+		}
 		return returnData;
 	}
 
 	const onSubmit = async (data: IContactData): Promise<void> => {
 		const newData = formatForm(data);
-		console.log("adding user");
+		// console.log("adding user");
+		if (!newData)
+			return
 		await ContactService.update(userData?.id || "", newData, user.data.googleId).then(res => {
 
 		});

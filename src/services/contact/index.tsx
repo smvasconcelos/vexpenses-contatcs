@@ -17,7 +17,7 @@ export interface IContactData {
 class ContactService {
 
 	getAll = async (id: string) => {
-		return db.doc(id).collection("list").get();
+		return db.doc(id).collection("list").orderBy("name").get();
 	}
 
 	add = async (data: any, id: string) => {
@@ -32,7 +32,7 @@ class ContactService {
 		}
 	}
 
-	update = async (id: string, data: IContactData, userId: string) => {
+	update = async (id: string, data: IContactData | any, userId: string) => {
 		return await db.doc(userId).collection("list").doc(id).set(data).then(() => {
 			toast.success('Contato atualizado com sucesso.');
 			return true;
@@ -52,15 +52,48 @@ class ContactService {
 		});
 	}
 
-	handleGoogleImport = (data: any): boolean => {
+	handleGoogleImport = async (data: any, userId: string): Promise<any> => {
 		if (data.totalItems === 0)
 			return true;
-
-		data.connections.map((connectionArray: any) => {
-			// const userData : IContactData
-			console.log({ connectionArray });
+		var firebaseData: Array<IContactData> = [];
+		data.connections.map((connection: any) => {
+			const userData: IContactData = {
+				name: connection.names[0].displayName.toUpperCase(),
+				phone: connection.phoneNumbers ? connection.phoneNumbers.map((phone: any) => phone.value) : [],
+				email: connection.emailAddresses ? connection.emailAddresses[0].value : "",
+				job: "",
+				address: connection.addresses ? connection.addresses.map((address: any) => {
+					return {
+						street: address.streetAddress,
+						city: address.city,
+						state: address.region,
+						country: address.country,
+						zip: address.postalCode
+					}
+				}).filter((address: any) => address.street !== undefined) : [],
+				description: "",
+			};
+			firebaseData.push(userData);
 		})
-		return true;
+
+		var batch = firestore.batch();
+
+		const saveBatch = (docs: any[]) => {
+			docs.forEach((doc) => {
+				var docRef = db.doc(userId).collection("list").doc(); //automatically generate unique id
+				batch.set(docRef, doc);
+			});
+			return batch.commit();
+		}
+
+		return saveBatch(firebaseData);
+		// console.table(firebaseData);
+		// return await db.doc(userId).collection("list").add(firebaseData).then((res) => {
+		// 	return true;
+		// }).catch(e => {
+		// 	console.log(e);
+		// 	return false;
+		// });
 	}
 
 }

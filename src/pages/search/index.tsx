@@ -34,12 +34,12 @@ const SearchContent: React.FC = () => {
 	useEffect(() => {
 		const getContacts = async () => {
 			setLoading(true);
-			console.log(user.data.googleId)
 			await ContactService.getAll(user.data.googleId).then((querySnapshot) => {
 				// querySnapshot.onSnapshot((res: any) => {
 				querySnapshot.docs.map((doc: any) => {
 					var data = doc.data();
 					data.id = doc.id;
+					console.log(data.name);
 					setContactList((prevState) => [...prevState, data]);
 					setFilteredList((prevState) => [...prevState, data]);
 					setLoading(false);
@@ -63,13 +63,14 @@ const SearchContent: React.FC = () => {
 						<TailSpin wrapperStyle={{ justifyContent: 'center', margin: '3em 0' }} color={theme.colors.active} height={35} width={35} />
 						:
 						filteredList.length > 0 ? filteredList.map((contact) => {
-							const char = contact.name[0] !== currentKey ? contact.name[0] : "";
-							currentKey = contact.name[0] !== currentKey ? contact.name[0] : currentKey;;
+							const name = contact.name.toUpperCase();
+							const char = name[0] !== currentKey ? name[0] : "";
+							currentKey = name[0] !== currentKey ? name[0] : currentKey;;
 							return (
 								<ListItem char={char} key={contact.id} onClick={() => navigate(`/contact/edit/${btoa(JSON.stringify(contact))}`)}>
 									<span style={{ textTransform: 'uppercase' }}>{contact.name}</span >
 									<span>{contact.phone[0]}</span >
-									<span>{contact.job}</span >
+									<span>{contact.job || "Não cadastrado"}</span >
 								</ListItem>
 							)
 						}) :
