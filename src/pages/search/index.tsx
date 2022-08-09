@@ -70,7 +70,6 @@ const SearchContent: React.FC = () => {
 								<ListItem char={char} key={contact.id} onClick={() => navigate(`/contact/edit/${btoa(JSON.stringify(contact))}`)}>
 									<span style={{ textTransform: 'uppercase' }}>{contact.name}</span >
 									<span>{contact.phone[0]}</span >
-									<span>{contact.job || "Não cadastrado"}</span >
 								</ListItem>
 							)
 						}) :
