@@ -1,11 +1,10 @@
-<p align="center">
-	Vexpenses Cotacts
-</p>
+<h1 align="center">
+	Vexpenses Contacts
+</h1>
 
 <p align="center">
-![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
-
-	![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+	<img alt="firebase-badge" title="firebase-badge" src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase" />
+	<img alt="react-badge" title="react-badge" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
 </p>
 
 <h1 align="center">Desafios</h1>
@@ -28,13 +27,13 @@
 
 <p>
 	Esta aplicação foi desenvolvida durante um processo seletivo para demonstrar algumas qualidades tecnicas de desenvolvimento.
-	Foi utilizado React JS com typescript no seu desenvolvimento. O principal objetivo desta aplicação é permitir o gerenciamento de contatos dos usuários. Dentre suas funcionalidades de gerenciamentos foram desenvolvidas alguns requisitos extras, como login com google e sincronização de contatos com o google contatos.
+	Foi utilizado React JS com typescript no seu desenvolvimento. O principal objetivo desta aplicação é permitir o gerenciamento de contatos dos usuários. Dentre suas funcionalidades de gerenciamentos foram desenvolvidas alguns requisitos extras como login com google e sincronização de contatos com o google contatos.
 </p>
 
 
 <h1 align="center"> Desenvolvimento </h1>
 
-O desenvolvimento demorou por volta de 3 dias, e me proporcionou uma nova camada de aprendizado, uma vez que não existia muita familiaridade com a api de login do google e de contatos. No geral foi aplicado uma estrutura padrão de organização, utilizando sempre a modularização de componentes e em suas estilizações foi utilizado o styled como pacote de auxilio.
+O desenvolvimento demorou por volta de 3 dias, e me proporcionou uma nova camada de aprendizado uma vez que não existia muita familiaridade com a api de login do google e de contatos. No geral foi aplicado uma estrutura padrão de organização, utilizando sempre a modularização de componentes e em suas estilizações foi utilizado o styled como pacote de auxilio.
 
 <h1 align="center"> Mockup </h1>
 <p align="center">
