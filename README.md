@@ -26,11 +26,11 @@
 - [x] Remoção de contatos
 - [x] Edição de contatos
 
-<!-- Por conta de como o sistema de validação do google funciona, é necessário adicionar os emails dos usuários que desejam realizar login nesta plataforma uma vez que o google limita o acesso de novas aplicações não verificadas. No momento esta plataforma foi enviada para analise, caso aprovado o login poderá ser realizado livremente.
+Por conta de como o sistema de validação do google funciona, é necessário adicionar os emails dos usuários que desejam realizar login nesta plataforma uma vez que o google limita o acesso de novas aplicações não verificadas.
 
 <p align="center">
 <img alt="denied-access" title="denied-access" src=".github/denied.jpg" />
-</p> -->
+</p>
 
 <h1 align="center"> Sobre </h1>
 <p>
