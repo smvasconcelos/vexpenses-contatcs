@@ -15,6 +15,11 @@ interface Viacep {
 }
 
 const MailService = {
+	/**
+	* Recebe um cep e retorna os dados da localização
+	* @param cep cep do local
+	* @returns objeto com os dados do local
+	*/
 	getAddress: async (cep: number): Promise<Viacep> => {
 		return await handleApi(`/${cep}/json`, 'get', {});
 	}

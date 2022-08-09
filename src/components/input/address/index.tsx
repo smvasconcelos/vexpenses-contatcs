@@ -38,6 +38,11 @@ const AddressInput
 
 		const [show, setShow] = useState(false);
 
+		/**
+		* Recebe o cep e busca o endereço na api
+		* @param cep cep do local
+		* @returns void
+		*/
 		const getAddress = async (cep: string) => {
 			await MailService.getAddress(parseInt(cep)).then(res => {
 				console.log("aki");

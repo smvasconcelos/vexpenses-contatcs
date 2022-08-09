@@ -44,6 +44,11 @@ const EditContent: React.FC = () => {
 		}
 	}, [userInfo]);
 
+	/**
+	* Recebe os dados do formulario e os formata para o formato do banco de dados
+	* @param data dados do form
+	* @returns os dados formatados para o banco de dados
+	*/
 	const formatForm = (data: any): IContactData | boolean => {
 
 		const arrayToAddress = (data: Array<string>, keywords: Array<string>): object => {

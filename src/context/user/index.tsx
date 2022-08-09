@@ -30,6 +30,11 @@ export const AuthProvider: React.FC<IAuth> = ({ children }) => {
 		}
 	}, []);
 
+	/**
+	* Recebe os dados do o usuário os salva no cache
+	* @param data dados do usuário
+	* @returns boolean
+	*/
 	const login = (data: any): boolean => {
 		try {
 			setUser(data);
@@ -41,6 +46,10 @@ export const AuthProvider: React.FC<IAuth> = ({ children }) => {
 		}
 	}
 
+	/**
+	* Retira os dados do usuário do cache
+	* @returns void
+	*/
 	const logout = (): boolean => {
 		try {
 			setSignedIn(false);

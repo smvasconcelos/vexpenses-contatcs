@@ -13,6 +13,7 @@ const HomeContent: React.FC = () => {
 	const { user, login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
+	// Callback responsavel pelo login com o google
 	const loginCallback = async (response: any) => {
 		console.log(response);
 		if (login!({
@@ -25,6 +26,7 @@ const HomeContent: React.FC = () => {
 		}
 	}
 
+	// Inicia os scripts do google e prepara o escopo de login
 	useEffect(() => {
 		const start = () => {
 			gapi.client.init({

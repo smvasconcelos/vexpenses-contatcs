@@ -22,7 +22,11 @@ const SearchContent: React.FC = () => {
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
 
-
+	/**
+	* Recebe os dados do formulario e os formata para o formato do banco de dados
+	* @param data dados do form
+	* @returns um objeto do tipo IContactData ou false caso não tenha passado na validação
+	*/
 	const formatForm = (data: any): IContactData | boolean => {
 
 		const arrayToAddress = (data: Array<string>, keywords: Array<string>): object => {
@@ -84,6 +88,11 @@ const SearchContent: React.FC = () => {
 		return returnData;
 	}
 
+	/**
+	* Recebe os dados do formulario e os formata para o formato do banco de dados
+	* @param data dados do form
+	* @returns void
+	*/
 	const onSubmit = async (data: IContactData): Promise<void> => {
 		const newData = formatForm(data);
 		// console.log("adding user");

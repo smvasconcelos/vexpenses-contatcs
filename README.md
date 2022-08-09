@@ -26,11 +26,11 @@
 - [x] Remoção de contatos
 - [x] Edição de contatos
 
-Por conta de como o sistema de validação do google funciona, é necessário adicionar os emails dos usuários que desejam realizar login nesta plataforma uma vez que o google limita o acesso de novas aplicações não verificadas. No momento esta plataforma foi enviada para analise, caso aprovado o login poderá ser realizado livremente.
+<!-- Por conta de como o sistema de validação do google funciona, é necessário adicionar os emails dos usuários que desejam realizar login nesta plataforma uma vez que o google limita o acesso de novas aplicações não verificadas. No momento esta plataforma foi enviada para analise, caso aprovado o login poderá ser realizado livremente.
 
 <p align="center">
 <img alt="denied-access" title="denied-access" src=".github/denied.jpg" />
-</p>
+</p> -->
 
 <h1 align="center"> Sobre </h1>
 <p>
@@ -40,7 +40,7 @@ Por conta de como o sistema de validação do google funciona, é necessário ad
 
 
 <h1 align="center"> Desenvolvimento </h1>
-O desenvolvimento demorou por volta de 3 dias, e me proporcionou uma nova camada de aprendizado uma vez que não existia muita familiaridade com a api de login do google e de contatos. No geral foi aplicado uma estrutura padrão de organização, utilizando sempre a modularização de componentes e em suas estilizações foi utilizado o styled como pacote de auxilio.
+Durante este periodo de desenvolvimento foi me proporcionado uma nova camada de aprendizado uma vez que não existia muita familiaridade com a api de login do google e de contatos. No geral foi aplicado uma estrutura padrão de organização, utilizando sempre a modularização de componentes e em suas estilizações foi utilizado o styled como pacote de auxilio.
 
 
 <h1 align="center"> Como Usar </h1>

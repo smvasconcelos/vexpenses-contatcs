@@ -9,7 +9,6 @@ const Template: React.FC<{ children: any }> = ({ children }) => {
 		<Container>
 			<Navbar />
 			<TemplateContainer>
-				{/* <Noise src={"assets/img/noise.png"} /> */}
 				<Circle size={200} position="top: 45vh; left: 15vw; opacity: .3" type={1} />
 				<Circle size={400} position="top: -25vh; left: 35vw; opacity: .9;" type={1} />
 				<Circle size={300} position="top: 45vh; right: 10%; opacity: .5;" type={2} />

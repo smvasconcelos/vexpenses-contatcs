@@ -9,7 +9,6 @@ const UserTemplate: React.FC<{ children: any }> = ({ children }) => {
 		<Container>
 			<Sidebar />
 			<TemplateContainer>
-				{/* <Noise src={"assets/img/noise.png"} /> */}
 				<Circle size={200} position="top: 35vh; left: 10vw; opacity: .3" type={1} />
 				<Circle size={300} position="bottom: 0; right: 5%; opacity: .3;" type={2} />
 			</TemplateContainer>

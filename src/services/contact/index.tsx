@@ -16,10 +16,21 @@ export interface IContactData {
 
 class ContactService {
 
+	/**
+ * Recebe o ID do usuário e retorna todos os contatos do usuário
+ * @param id googleId do usuário
+ * @returns um Snapshot do banco de dados
+ */
 	getAll = async (id: string) => {
 		return db.doc(id).collection("list").orderBy("name").get();
 	}
 
+	/**
+	* Recebe uma coleção de dados e um googleId e os adiciona na lista de contatos do usuário
+	* @param data IContactData do contato
+	* @param id googleId do usuário
+	* @returns boolean
+	*/
 	add = async (data: any, id: string) => {
 		try {
 			await db.doc(id).collection("list").add(data);
@@ -32,6 +43,13 @@ class ContactService {
 		}
 	}
 
+	/**
+	* Recebe uma coleção de dados e um googleId e os adiciona na lista de contatos do usuário
+	* @param data IContactData do contato
+	* @param id id do contato
+	* @param userId googleId do usuário
+	* @returns boolean
+	*/
 	update = async (id: string, data: IContactData | any, userId: string) => {
 		return await db.doc(userId).collection("list").doc(id).set(data).then(() => {
 			toast.success('Contato atualizado com sucesso.');
@@ -42,6 +60,12 @@ class ContactService {
 		});
 	}
 
+	/**
+	* Recebe o id do usuário e o id do contato a ser removido
+	* @param id id do contato
+	* @param userId googleId do usuário
+	* @returns boolean
+	*/
 	remove = async (id: string, userId: string) => {
 		return await db.doc(userId).collection("list").doc(id).delete().then(() => {
 			toast.success('Contato removido com sucesso.');
@@ -52,6 +76,12 @@ class ContactService {
 		});
 	}
 
+	/**
+	* Recebe os contatos retornados pelo google , e o googleId do usuário e os adiciona na coleção de contatos
+	* @param data dados do google
+	* @param userId googleId do usuário
+	* @returns boolean
+	*/
 	handleGoogleImport = async (data: any, userId: string): Promise<any> => {
 		if (data.totalItems === 0)
 			return true;

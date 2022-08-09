@@ -15,6 +15,11 @@ const InputSearch: React.FC<
 	const [show, setShow] = useState(false);
 	const [filteredAutoCompleteItems, setFilteredAutoCompleteItems] = useState<Array<Object>>([]);
 
+	/**
+	* Recebe o input da pesquisa e retorna os itens filtrados
+	* @param value valor do input
+	* @returns array de items filtrados
+	*/
 	const searcher = new FuzzySearch(autoCompleteItems || [], ['name', 'email', 'phone', 'job', 'address'], {
 		caseSensitive: false,
 	});
@@ -24,6 +29,11 @@ const InputSearch: React.FC<
 		return helpers.similarity(string_1.toLowerCase(), string_2.toLowerCase()) >= threshold || string_1.toLowerCase().includes(string_2.toLowerCase());
 	}
 
+	/**
+	* Compara o valor do input com os itens do autoComplete
+	* @param items itens do autoComplete
+	* @returns void
+	*/
 	const getAutoCompleteItems = (items: Array<Object>) => {
 		var filteredItems: Array<String> = [];
 		items.map((item: Object) => {
