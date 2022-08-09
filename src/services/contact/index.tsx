@@ -88,7 +88,7 @@ class ContactService {
 		var firebaseData: Array<IContactData> = [];
 		data.connections.map((connection: any) => {
 			const userData: IContactData = {
-				name: connection.names[0].displayName.toUpperCase(),
+				name: connection.names ? connection.names[0].displayName.toUpperCase() : "",
 				phone: connection.phoneNumbers ? connection.phoneNumbers.map((phone: any) => phone.value) : [],
 				email: connection.emailAddresses ? connection.emailAddresses[0].value : "",
 				job: "",
