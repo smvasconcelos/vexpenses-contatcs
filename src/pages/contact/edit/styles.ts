@@ -141,3 +141,18 @@ export const DeleteContactButton = styled.img`
 	right: 10px;
 	cursor: pointer;
 `
+
+export const EditContactButton = styled.img`
+	width: 20px;
+	height: 20px;
+	margin-left: 1em;
+	cursor: pointer;
+`
+
+export const NameContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+`

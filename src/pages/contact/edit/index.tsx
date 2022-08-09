@@ -1,6 +1,6 @@
 import InputComponent from 'components/input';
 import React, { useContext, useEffect, useState } from 'react';
-import { ButtonContainer, Container, ContainerRight, Content, DeleteContactButton, Description, Divider, Name, Title, UserCard } from './styles';
+import { ButtonContainer, Container, ContainerRight, Content, DeleteContactButton, Description, Divider, EditContactButton, Name, NameContainer, Title, UserCard } from './styles';
 import UserTemplate from 'templates/user';
 import ButtonComponent from 'components/button';
 import AddressInput from 'components/input/address';
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { TailSpin } from 'react-loader-spinner';
 import theme from 'config/theme';
 import removeIcon from "assets/icons/remove.svg";
+import editIcon from "assets/icons/edit.svg";
 import AuthContext from 'context/user';
 
 const EditContent: React.FC = () => {
@@ -118,7 +119,8 @@ const EditContent: React.FC = () => {
 		if (!newData)
 			return
 		await ContactService.update(userData?.id || "", newData, user.data.googleId).then(res => {
-
+			if (res)
+				navigate("/search");
 		});
 	};
 
@@ -170,9 +172,12 @@ const EditContent: React.FC = () => {
 					: <UserCard>
 						<DeleteContactButton onClick={handleDeleteUser} src={removeIcon} />
 						<Container onClick={() => showEdit(!edit)}>
-							<Name>
-								{userData?.name || ""}
-							</Name>
+							<NameContainer>
+								<Name>
+									{userData?.name || ""}
+								</Name>
+								<EditContactButton onClick={() => showEdit(!edit)} src={editIcon} />
+							</NameContainer>
 							<Divider />
 							<Description>
 								{userData?.description || ""}
