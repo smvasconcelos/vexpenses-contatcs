@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/vexpenses-contatcs/static/css/main.1ad965a1.css",
-    "main.js": "/vexpenses-contatcs/static/js/main.c2bfc4ef.js",
+    "main.js": "/vexpenses-contatcs/static/js/main.cc985a73.js",
     "static/media/Montserrat-ExtraBoldItalic.otf": "/vexpenses-contatcs/static/media/Montserrat-ExtraBoldItalic.40f128951c4ea9783bcc.otf",
     "static/media/Montserrat-LightItalic.otf": "/vexpenses-contatcs/static/media/Montserrat-LightItalic.3e42265f6f47b3ad5225.otf",
     "static/media/Montserrat-Bold.otf": "/vexpenses-contatcs/static/media/Montserrat-Bold.a6bc51efd33e2f7f1b95.otf",
@@ -16,10 +16,10 @@
     "static/media/logout.svg": "/vexpenses-contatcs/static/media/logout.dbe8886ce150580623d70e01be2935d1.svg",
     "static/media/remove.svg": "/vexpenses-contatcs/static/media/remove.037fb53c4b16c142bdc4f6aabe3e41a2.svg",
     "main.1ad965a1.css.map": "/vexpenses-contatcs/static/css/main.1ad965a1.css.map",
-    "main.c2bfc4ef.js.map": "/vexpenses-contatcs/static/js/main.c2bfc4ef.js.map"
+    "main.cc985a73.js.map": "/vexpenses-contatcs/static/js/main.cc985a73.js.map"
   },
   "entrypoints": [
     "static/css/main.1ad965a1.css",
-    "static/js/main.c2bfc4ef.js"
+    "static/js/main.cc985a73.js"
   ]
 }
