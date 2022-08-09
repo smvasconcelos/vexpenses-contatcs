@@ -43,23 +43,10 @@ const Sidebar: React.FC<{ user?: boolean }> = () => {
 
 	return (
 		<Nav>
-			{/* <NavItem src={menuIcon} onClick={() => navigate("/")} /> */}
 			<NavItem src={contactIcon} onClick={() => navigate("/search")} />
 			<NavItem src={addIcon} onClick={() => navigate("/contact/add")} />
 			<NavItem src={importIcon} onClick={handleImport} />
 			<NavItem onClick={handleLogout} src={logoutIcon} />
-			{/* <GoogleLogout
-				clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
-				buttonText=""
-				render={(renderProps) => {
-					return (
-					)
-				}}
-				onLogoutSuccess={handleLogout}
-				onFailure={() => {
-					toast.error("Aconteceu um erro ao sair, tente novamente");
-				}}
-			/> */}
 		</Nav>
 	)
 }

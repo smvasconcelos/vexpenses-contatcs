@@ -12,7 +12,7 @@ const HomeContent: React.FC = () => {
 	const { user, login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	const callback = async (response: any) => {
+	const loginCallback = async (response: any) => {
 		const userData = await GoogleService.getUserInfo(response.access_token).catch(e => {
 			return;
 		});
@@ -30,7 +30,7 @@ const HomeContent: React.FC = () => {
 	}
 
 	const googleLogin = useGoogleLogin({
-		onSuccess: callback,
+		onSuccess: loginCallback,
 		onError: () => {
 			toast.error("Erro ao realizar login, tente novamente.");
 		},
