@@ -41,7 +41,7 @@ const HomeContent: React.FC = () => {
 			<Title>
 				VEXPENSES <br /> CONTATOS
 			</Title>
-			<LoginButtonContainer onClick={googleLogin}>
+			<LoginButtonContainer onClick={() => googleLogin()}>
 				<GoogleIcon src={googleIcon} /> Login com google
 			</LoginButtonContainer>
 			<LegendContainer>
