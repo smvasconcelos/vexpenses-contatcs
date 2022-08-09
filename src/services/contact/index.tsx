@@ -85,9 +85,13 @@ class ContactService {
 	handleGoogleImport = async (data: any, userId: string): Promise<any> => {
 		if (data.totalItems === 0)
 			return true;
+
 		var firebaseData: Array<IContactData> = [];
 		data.connections.map((connection: any) => {
+			const id = connection.resourceName.split("/")[1];
+			console.log(connection);
 			const userData: IContactData = {
+				id: id || "",
 				name: connection.names ? connection.names[0].displayName.toUpperCase() : "",
 				phone: connection.phoneNumbers ? connection.phoneNumbers.map((phone: any) => phone.value) : [],
 				email: connection.emailAddresses ? connection.emailAddresses[0].value : "",
@@ -110,7 +114,7 @@ class ContactService {
 
 		const saveBatch = (docs: any[]) => {
 			docs.forEach((doc) => {
-				var docRef = db.doc(userId).collection("list").doc();
+				var docRef = db.doc(userId).collection("list").doc(doc.id);
 				batch.set(docRef, doc);
 			});
 			return batch.commit();
