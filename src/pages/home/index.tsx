@@ -16,7 +16,7 @@ const HomeContent: React.FC = () => {
 			data: response.profileObj,
 			accessToken: response.accessToken
 		})) {
-			toast.success('Login realizado com sucesso');
+			// toast.success('Login realizado com sucesso');
 			navigate("/search");
 		} else {
 			toast.error('Erro ao realizar login, tente novamente');

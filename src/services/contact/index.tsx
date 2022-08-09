@@ -80,20 +80,13 @@ class ContactService {
 
 		const saveBatch = (docs: any[]) => {
 			docs.forEach((doc) => {
-				var docRef = db.doc(userId).collection("list").doc(); //automatically generate unique id
+				var docRef = db.doc(userId).collection("list").doc();
 				batch.set(docRef, doc);
 			});
 			return batch.commit();
 		}
 
 		return saveBatch(firebaseData);
-		// console.table(firebaseData);
-		// return await db.doc(userId).collection("list").add(firebaseData).then((res) => {
-		// 	return true;
-		// }).catch(e => {
-		// 	console.log(e);
-		// 	return false;
-		// });
 	}
 
 }
