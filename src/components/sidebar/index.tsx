@@ -6,12 +6,11 @@ import addIcon from "assets/icons/add.svg";
 import contactIcon from "assets/icons/contact.svg";
 import menuIcon from "assets/icons/menu.svg";
 import importIcon from "assets/icons/import.svg";
-// import { GoogleLogout } from "react-google-login";
+import { GoogleLogout } from "react-google-login";
 import AuthContext from "context/user";
 import { toast } from "react-toastify";
 import GoogleService from "services/google";
 import ContactService from "services/contact";
-import { googleLogout } from '@react-oauth/google';
 
 const Sidebar: React.FC<{ user?: boolean }> = () => {
 
@@ -20,11 +19,10 @@ const Sidebar: React.FC<{ user?: boolean }> = () => {
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		googleLogout();
-		if (logout!())
-			navigate("/");
-		else
-			toast.error("Aconteceu um erro ao sair, tente novamente.");
+		// if (logout!())
+		// 	navigate("/");
+		// else
+		// 	toast.error("Aconteceu um erro ao sair, tente novamente.");
 	}
 
 	const handleImport = async () => {
@@ -46,7 +44,19 @@ const Sidebar: React.FC<{ user?: boolean }> = () => {
 			<NavItem src={contactIcon} onClick={() => navigate("/search")} />
 			<NavItem src={addIcon} onClick={() => navigate("/contact/add")} />
 			<NavItem src={importIcon} onClick={handleImport} />
-			<NavItem onClick={handleLogout} src={logoutIcon} />
+			<GoogleLogout
+				clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+				buttonText=""
+				render={(renderProps) => {
+					return (
+						<NavItem onClick={renderProps.onClick} src={logoutIcon} />
+					)
+				}}
+				onLogoutSuccess={handleLogout}
+				onFailure={() => {
+					toast.error("Aconteceu um erro ao sair, tente novamente");
+				}}
+			/>
 		</Nav>
 	)
 }

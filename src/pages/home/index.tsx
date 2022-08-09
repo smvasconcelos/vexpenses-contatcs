@@ -1,49 +1,62 @@
-import { useGoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 import AuthContext from 'context/user';
-import React, { useContext } from 'react';
-import googleIcon from "assets/icons/google.svg";
+import { gapi } from 'gapi-script';
+import React, { useContext, useEffect } from 'react';
+import GoogleLogin from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-import GoogleService from 'services/google';
 import Template from 'templates';
 import { Container, GoogleIcon, LegendCard, LegendContainer, LegendText, LegendTitle, LoginButtonContainer, Title } from './styles';
+import googleIcon from "assets/icons/google.svg";
 
 const HomeContent: React.FC = () => {
 	const { user, login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const loginCallback = async (response: any) => {
-		const userData = await GoogleService.getUserInfo(response.access_token).catch(e => {
-			return;
-		});
-		if (userData)
-			if (login!({
-				data: { googleId: userData.resourceName.split("/")[1] },
-				accessToken: response.access_token
-			})) {
-				navigate("/search");
-			} else {
-				toast.error('Erro ao realizar login, tente novamente.');
-			}
-		else
-			toast.error('Erro ao solicitar dados do usuário, tente novamente.');
+		if (login!({
+			data: response.profileObj,
+			accessToken: response.accessToken
+		})) {
+			navigate("/search");
+		} else {
+			toast.error('Erro ao realizar login, tente novamente');
+		}
 	}
 
-	const googleLogin = useGoogleLogin({
-		onSuccess: loginCallback,
-		onError: () => {
-			toast.error("Erro ao realizar login, tente novamente.");
-		},
-	});
+	useEffect(() => {
+		const start = () => {
+			gapi.client.init({
+				clientId: `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`,
+				scope: 'profile email https://www.googleapis.com/auth/contacts.readonly',
+			});
+		}
+		gapi.load('client:auth2', start);
+	}, []);
 
 	return (
 		<Container>
 			<Title>
 				VEXPENSES <br /> CONTATOS
 			</Title>
-			<LoginButtonContainer onClick={() => googleLogin()}>
-				<GoogleIcon src={googleIcon} /> Login com google
-			</LoginButtonContainer>
+			<GoogleLogin
+				clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+				buttonText="Login com google"
+				onSuccess={loginCallback}
+				render={(renderProps) => {
+					return (
+						<LoginButtonContainer onClick={renderProps.onClick}>
+							<GoogleIcon src={googleIcon} /> Login com google
+						</LoginButtonContainer>
+					)
+				}}
+				onFailure={() => {
+					toast.error("Erro ao realizar login, tente novamente.");
+				}}
+				cookiePolicy={'single_host_origin'}
+				theme={"dark"}
+			/>
+
 			<LegendContainer>
 				<LegendCard>
 					<LegendTitle>
