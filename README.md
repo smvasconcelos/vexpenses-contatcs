@@ -54,11 +54,9 @@ $ cd vexpenses-contatcs
 $ yarn
 
 - Configure o arquivo de ambiente com a chave da api da google
-
 $ REACT_APP_GOOGLE_CLIENT_ID
 
 - Configure o arquivo com as informações do firebase
-
 $ src/config/firebase.ts
 
 - Inicie o app:
