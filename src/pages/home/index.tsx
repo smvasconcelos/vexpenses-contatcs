@@ -32,6 +32,8 @@ const HomeContent: React.FC = () => {
 			});
 		}
 		gapi.load('client:auth2', start);
+		console.log(`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`);
+		console.log("deveria estar aki");
 	}, []);
 
 	return (
