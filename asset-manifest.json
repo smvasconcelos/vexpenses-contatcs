@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/vexpenses-contatcs/static/css/main.1ad965a1.css",
-    "main.js": "/vexpenses-contatcs/static/js/main.fe907ac6.js",
+    "main.js": "/vexpenses-contatcs/static/js/main.f642f5e5.js",
     "static/media/Montserrat-ExtraBoldItalic.otf": "/vexpenses-contatcs/static/media/Montserrat-ExtraBoldItalic.40f128951c4ea9783bcc.otf",
     "static/media/Montserrat-LightItalic.otf": "/vexpenses-contatcs/static/media/Montserrat-LightItalic.3e42265f6f47b3ad5225.otf",
     "static/media/Montserrat-Bold.otf": "/vexpenses-contatcs/static/media/Montserrat-Bold.a6bc51efd33e2f7f1b95.otf",
@@ -13,13 +13,14 @@
     "static/media/google.svg": "/vexpenses-contatcs/static/media/google.9cd7467419dd00c2e591e7bcf920f803.svg",
     "index.html": "/vexpenses-contatcs/index.html",
     "static/media/add.svg": "/vexpenses-contatcs/static/media/add.41cef245ee13526ee5f4f2de96720a6b.svg",
+    "static/media/edit.svg": "/vexpenses-contatcs/static/media/edit.adc363f8d83d1ec6cad9dcd550e1cbd6.svg",
     "static/media/logout.svg": "/vexpenses-contatcs/static/media/logout.dbe8886ce150580623d70e01be2935d1.svg",
     "static/media/remove.svg": "/vexpenses-contatcs/static/media/remove.037fb53c4b16c142bdc4f6aabe3e41a2.svg",
     "main.1ad965a1.css.map": "/vexpenses-contatcs/static/css/main.1ad965a1.css.map",
-    "main.fe907ac6.js.map": "/vexpenses-contatcs/static/js/main.fe907ac6.js.map"
+    "main.f642f5e5.js.map": "/vexpenses-contatcs/static/js/main.f642f5e5.js.map"
   },
   "entrypoints": [
     "static/css/main.1ad965a1.css",
-    "static/js/main.fe907ac6.js"
+    "static/js/main.f642f5e5.js"
   ]
 }
