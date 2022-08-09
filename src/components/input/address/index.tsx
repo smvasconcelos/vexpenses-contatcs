@@ -16,6 +16,10 @@ interface AddressData {
 	neighborhood?: string;
 }
 
+type HTMLElementEvent<T extends HTMLElement> = Event & {
+	target: T;
+}
+
 interface IInput {
 	label: string;
 	register?: any;
@@ -67,14 +71,14 @@ const AddressInput
 							value: initialValue?.cep || ""
 						})}
 						onChange={
-							((event) => {
-								const { value } = event.target;
+							((event: any) => {
+								const value = event.target.value;
 								event.target.value = masks.cepMask(value);
 								checkAdd(value);
 							})
 						}
-						onKeyDown={async (event) => {
-							const { value } = event.target;
+						onKeyDown={async (event: any) => {
+							const value = event.target.value;
 							if (event.code === "Enter" && value) {
 								event.stopPropagation();
 								event.preventDefault();
