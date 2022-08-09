@@ -6,7 +6,6 @@
 	<img alt="Vexpenses Contacts" title="Vexpences Contacts" src=".github/capa.png" />
 </p>
 
-
 <p align="center">
 	<img alt="firebase-badge" title="firebase-badge" src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase" />
 	<img alt="react-badge" title="react-badge" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
@@ -65,3 +64,4 @@ $ src/config/firebase.ts
 - Inicie o app:
 $ yarn start
 ```
+Ou caso deseje acessar uma versão já configurada a aplicação está disponível no seguinte endereço: https://smvasconcelos.github.io/vexpenses-contatcs/.
