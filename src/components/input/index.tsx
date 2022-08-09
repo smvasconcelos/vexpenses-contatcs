@@ -37,7 +37,7 @@ const InputComponent: React.FC<IInput> = ({ label, unregister, getValues, regist
 				})} placeholder={label}
 				onChange={
 					((event) => {
-						const { value } = event.target;
+						const value = event.target.value;
 						checkAdd(value);
 						event.target.value = mask ? mask(value) : value;
 					})

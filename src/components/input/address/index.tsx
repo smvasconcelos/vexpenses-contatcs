@@ -68,13 +68,13 @@ const AddressInput
 						})}
 						onChange={
 							((event) => {
-								const { value } = event.target;
+								const value = event.target.value;
 								event.target.value = masks.cepMask(value);
 								checkAdd(value);
 							})
 						}
 						onKeyDown={async (event) => {
-							const { value } = event.target;
+							const value = event.target.value;
 							if (event.code === "Enter" && value) {
 								event.stopPropagation();
 								event.preventDefault();
