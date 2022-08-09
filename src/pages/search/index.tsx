@@ -39,7 +39,6 @@ const SearchContent: React.FC = () => {
 				querySnapshot.docs.map((doc: any) => {
 					var data = doc.data();
 					data.id = doc.id;
-					console.log(data.name);
 					setContactList((prevState) => [...prevState, data]);
 					setFilteredList((prevState) => [...prevState, data]);
 					setLoading(false);

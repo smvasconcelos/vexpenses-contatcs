@@ -97,4 +97,30 @@ export const LegendText = styled.span`
 
 export const LoginButtonContainer = styled.div`
 	margin: 0 auto;
+	padding: 1em 2em;
+	background-color: rgba(0,0,0,.2);
+	box-shadow: 3px 3px 3px black;
+	color: white;
+	font-weight: bolder;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	box-sizing: border-box;
+	font-size: small;
+	border-radius: 5px;
+	cursor: pointer;
+	@media screen and (max-width: 600px) {
+		font-size: x-small;
+		font-weight: normal;
+		padding: .5em 1em;
+	}
+`
+export const GoogleIcon = styled.img`
+	width: 25px;
+	height: 25px;
+	margin-right: 1em;
+	@media screen and (max-width: 600px) {
+		width: 18px;
+		height: 18px;
+	}
 `
