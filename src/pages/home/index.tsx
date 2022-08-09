@@ -14,6 +14,7 @@ const HomeContent: React.FC = () => {
 	const navigate = useNavigate();
 
 	const loginCallback = async (response: any) => {
+		console.log(response);
 		if (login!({
 			data: response.profileObj,
 			accessToken: response.accessToken

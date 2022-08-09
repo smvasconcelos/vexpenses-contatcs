@@ -30,8 +30,7 @@ const Sidebar: React.FC<{ user?: boolean }> = () => {
 			await GoogleService.getGoogleContacts(user.accessToken).then(async (res) => {
 				await ContactService.handleGoogleImport(res, user.data.googleId)
 				toast.success("Contatos importados com sucesso.");
-				navigate("/");
-				window.location.reload();
+				navigate("/search");
 			}).catch(e => {
 				console.log(e);
 				toast.error("Falha ao importar contatos do google.");
