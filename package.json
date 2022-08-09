@@ -2,7 +2,10 @@
   "name": "vexpenses-contacts",
   "version": "0.1.0",
   "private": true,
-	"node": "^16.14.2",
+	"engines": {
+			"node": "^16.x.x",
+			"npm": "^8.x.x"
+	},
 	"homepage": "https://smvasconcelos.github.io/vexpenses-contatcs/",
   "dependencies": {
     "@react-oauth/google": "^0.2.6",
