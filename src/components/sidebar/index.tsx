@@ -19,10 +19,10 @@ const Sidebar: React.FC<{ user?: boolean }> = () => {
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		// if (logout!())
-		// 	navigate("/");
-		// else
-		// 	toast.error("Aconteceu um erro ao sair, tente novamente.");
+		if (logout!())
+			navigate("/");
+		else
+			toast.error("Aconteceu um erro ao sair, tente novamente.");
 	}
 
 	const handleImport = async () => {
