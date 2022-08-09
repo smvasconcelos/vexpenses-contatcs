@@ -13,7 +13,7 @@ const Form: React.FC<
 	const { handleSubmit } = methods;
 
 	return (
-		<form onSubmit={(event) => {
+		<form onSubmit={(event: any) => {
 			event.preventDefault();
 			event.stopPropagation();
 			handleSubmit(onSubmit)();
