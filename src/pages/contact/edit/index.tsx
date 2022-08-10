@@ -171,20 +171,7 @@ const EditContent: React.FC = () => {
 					<TailSpin wrapperStyle={{ justifyContent: 'center', margin: '3em 0' }} color={theme.colors.active} height={35} width={35} />
 					: <UserCard>
 						<DeleteContactButton onClick={handleDeleteUser} src={removeIcon} />
-						<Container onClick={() => showEdit(!edit)}>
-							<NameContainer>
-								<Name>
-									{userData?.name || ""}
-								</Name>
-								<EditContactButton onClick={() => showEdit(!edit)} src={editIcon} />
-							</NameContainer>
-							<Divider />
-							<Description>
-								{userData?.description || ""}
-							</Description>
-						</Container>
-						{
-							edit && <ContainerRight>
+						<ContainerRight>
 								<Title>
 									EDITAR USUÁRIO
 								</Title>
@@ -206,8 +193,7 @@ const EditContent: React.FC = () => {
 										<ButtonComponent submit label='Salvar' />
 									</ButtonContainer>
 								</Form>
-							</ContainerRight>
-						}
+						</ContainerRight>
 					</UserCard>
 			}
 
