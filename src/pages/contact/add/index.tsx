@@ -143,7 +143,7 @@ const SearchContent: React.FC = () => {
 						ADICIONAR CONTATO
 					</Title>
 					<Form onSubmit={onSubmit}>
-						<InputComponent name="name" label='Nome' />
+						<InputComponent name="name" label='Nome*' />
 						<InputComponent name="email" label='Email' />
 						<InputComponent
 							append={appendPhone} mask={masks.cellphoneMask} add key={`phone`} name={`phone`} label='Contato' />

@@ -25,7 +25,7 @@ const EditContent: React.FC = () => {
 	const [userData, setUser] = useState<IContactData | undefined>();
 	const [loading, setLoading] = useState(true);
 	const { userInfo } = useParams();
-	const requiredFields = ["name", "email", "job", "phone"];
+	const requiredFields = ["name"];
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
 
@@ -176,7 +176,7 @@ const EditContent: React.FC = () => {
 									EDITAR USUÁRIO
 								</Title>
 								<Form onSubmit={onSubmit}>
-									<InputComponent initialValue={userData?.name} name="name" label='Nome' />
+								<InputComponent initialValue={userData?.name} name="name" label='Nome*' />
 									<InputComponent initialValue={userData?.email} name="email" label='Email' />
 									<InputComponent
 										append={appendPhone} initialValue={userData?.phone[0]} mask={masks.cellphoneMask} add key={`phone`} name={`phone`} label='Contato' />
