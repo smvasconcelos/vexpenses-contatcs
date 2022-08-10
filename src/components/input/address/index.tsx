@@ -80,6 +80,8 @@ const AddressInput
 								const value = event.target.value;
 								event.target.value = masks.cepMask(value);
 								checkAdd(value);
+								if (value.length === 8)
+									getAddress(value)
 							})
 						}
 						onKeyDown={async (event: any) => {
@@ -88,7 +90,7 @@ const AddressInput
 								event.stopPropagation();
 								event.preventDefault();
 								if (value.length === 8)
-									await getAddress(value)
+									getAddress(value)
 							}
 						}}
 						placeholder={"45405105"}
